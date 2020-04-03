@@ -214,7 +214,7 @@ saveGrazing = function () {
         cattle_count: $('#dieraantal').val(),
         date1: $('#wei_start').val(),
         date2: $('#wei_eind').val()
-      }
+      };
 
       if (data.date2 < data.date1) {
         M.toast({ html: 'Datum einde weiden is eerder dan datum start weiden' });
@@ -255,15 +255,15 @@ saveFertilisation = function (type) {
 
       let data = {};
       if (type == "manure") {
-        data.zone_id = zone,
-          data.date = $('#datum_bemesten_dierlijk').val(),
-          data.amount = $('#hoeveelheid_dierlijk').val() * 1000, // Convert ton to kg
-          data.prd_id = $('#mestsoort_dierlijk').val()
+        data.zone_id = zone;
+        data.date = $('#datum_bemesten_dierlijk').val();
+        data.amount = $('#hoeveelheid_dierlijk').val() * 1000; // Convert ton to kg
+        data.prd_id = $('#mestsoort_dierlijk').val();
       } else if (type == "artificial") {
-        data.zone_id = zone,
-          data.date = $('#datum_bemesten_kunst').val(),
-          data.amount = $('#hoeveelheid_kunst').val(),
-          data.prd_id = $('#mestsoort_kunst').val()
+        data.zone_id = zone;
+        data.date = $('#datum_bemesten_kunst').val();
+        data.amount = $('#hoeveelheid_kunst').val();
+        data.prd_id = $('#mestsoort_kunst').val();
       }
 
       axios({
