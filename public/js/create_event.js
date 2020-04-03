@@ -98,7 +98,9 @@ $(document).ready(async function () {
       cancel: 'Terug',
       clear: 'Annuleren'
     },
-    autoClose: true
+    autoClose: true,
+    defaultDate: new Date(),
+    setDefaultDate: true
 
   });
 
