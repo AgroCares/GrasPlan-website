@@ -1,6 +1,9 @@
 # Changelog GrasPlan-website
 
 ## Version 1.2.1 2020-04-03
+### Added
+* Een stukje tekst is toegevoegd dat GrasPlan mede is gefinancieerd door het EU Landbouwfonds
+
 ### Changed
 * Bij het toevoegen van een actie staan de datums als default op vandaag
 * Bij het toevoegen van een bemesting, is het verplicht een mestproduct aan te geven
