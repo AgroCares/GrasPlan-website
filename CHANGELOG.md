@@ -7,6 +7,7 @@
 
 ### Fixed
 * Bij het opsturen van een bemesting ging soms wat fout doordat het data object niet goed werd aangemaakt
+* Fix security issue GHSA-7fhm-mqm4-2wp7s
 
 ## Version 1.2.0 2020-04-03
 GrasPlan website is released open-source :tada:
