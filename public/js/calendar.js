@@ -291,7 +291,7 @@ make_timeline = function (fields) {
           data_plot.push({
             actie: 'Maaien',
             id: item.mow_id,
-            x: [formatDate(item.mow_date, 0), formatDate(item.mow_date, 1)],
+            x: [formatDate(item.mow_date, 0), formatDate(item.mow_date, 0)],
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
@@ -347,7 +347,7 @@ make_timeline = function (fields) {
           data_plot.push({
             actie: 'Bemesten',
             id: item.fer_id,
-            x: [formatDate(item.fer_date, 0), formatDate(item.fer_date, 1)],
+            x: [formatDate(item.fer_date, 0), formatDate(item.fer_date, 0)],
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
@@ -374,7 +374,7 @@ make_timeline = function (fields) {
           data_plot.push({
             actie: 'Pesticidegebruik',
             id: item.pes_id,
-            x: [formatDate(item.pes_date, 0), formatDate(item.pes_date, 1)],
+            x: [formatDate(item.pes_date, 0), formatDate(item.pes_date, 0)],
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
@@ -402,7 +402,7 @@ make_timeline = function (fields) {
           data_plot.push({
             actie: 'Beheermaatregelen',
             id: item.nma_id,
-            x: [formatDate(item.nma_date, 0), formatDate(item.nma_date, 1)],
+            x: [formatDate(item.nma_date, 0), formatDate(item.nma_date, 0)],
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
@@ -430,7 +430,7 @@ make_timeline = function (fields) {
           data_plot.push({
             actie: 'Graslandvernwieuwing',
             id: item.nma_id,
-            x: [formatDate(item.nma_date, 0), formatDate(item.nma_date, 1)],
+            x: [formatDate(item.nma_date, 0), formatDate(item.nma_date, 0)],
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
