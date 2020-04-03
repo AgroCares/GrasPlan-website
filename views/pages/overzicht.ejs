@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <%- include("../partials/meta") %>
+
+    <title>Overzicht | GrasPlan</title>
+    <meta name="description" content="Overzicht van uw GrasPlan">
+
+    <script src="js/overzicht.js" defer></script>
+</head>
+
+<body>
+
+
+    <%- include("../partials/menu") %>
+
+
+    <!--Content voor de login -->
+    <div id="container" class="container content">
+
+        <h3>Uw GrasPlan account</h3>
+
+        <% if (advisor) { %>
+        <div class="row">
+            <h5>Adviseursoverzicht</h5>
+            <a href="advisor" class="btn">Uw Adviseursoverzicht</a>
+        </div>
+
+        <br>
+        <% } %>
+
+        <div class="row">
+            <h5>Overzicht bedrijven</h5>
+            <p>Het is mogelijk om meerdere bedrijven te hebben per account.
+                Hier staan alle bedrijven van uw account. Het is mogelijk om een bedrijf te verwijderen of een ander
+                bedrijf
+                te selecteren.
+            </p>
+            <br>
+        </div>
+
+        <div class="row">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bedrijfsnaam</th>
+                        <th>Selecteren</th>
+                        <th>Verwijderen</th>
+                    </tr>
+                    <thead>
+
+                    <tbody id="tbl_bedrijf">
+                    </tbody>
+            </table>
+        </div>
+
+        <br>
+        <h5>Bedrijfsgegevens wijzigen?</h5>
+        <p>Hier kunt u uw bedrijfsnaam wijzigen van het door uw geselecteerde bedrijf.</p>
+        <a id="change_farm" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Bedrijf
+            wijzigen</a>
+
+        <!-- modal for change bedrijfsnaam  -->
+        <div id="changefarm_modal" class="ui basic modal">
+            <div class="modal-content">
+                <h5>Wijzig hier de bedrijfsnaam van uw bedrijf</h5>
+                <div class="divider"></div>
+                <form id='modal_form'>
+                    <div class="input-field col s12">
+                        <input id="farm_name" type="text" class="validate">
+                        <label for="farm_name">Nieuwe Bedrijfsnaam</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a id="save_farmchange" href="#!" class="modal-close waves-effect waves-green btn-flat">Wijzig
+                    bedrijfsnaam</a>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="divider"></div>
+        <br>
+
+        <h5>Bedrijfsgegevens delen?</h5>
+        <p>Hier kunt u aangeven of u informatie van uw bedrijf wilt delen met derden (bijv. bedrijfsadviseur). Dit
+            akkoord geeft u voor het hierboven geselecteerde bedrijf. </p>
+        <div class="row">
+
+            <div class="switch">
+                <label>
+                    Nee
+                    <input id="switch_advisor" type="checkbox">
+                    <span class="lever"></span>
+                    Ja
+                </label>
+            </div>
+            <br>
+            <form id="form_advisor" class='hide'>
+                <div class="input-field col s12">
+                    <select multiple id="advisor_selected">
+                        <option value="" disabled>Selecteer organisatie</option>
+                    </select>
+                </div>
+            </form>
+            <br>
+            <a id="save_advisors" class="waves-effect waves-light btn"><i
+                    class="material-icons left">save</i>Wijzigingen
+                opslaan</a>
+        </div>
+        <br>
+        <div class="divider"></div>
+        <br>
+        <h5>Bedrijf toevoegen?</h5>
+        <p>Voeg hier een bedrijf toe als u voor meer bedrijven een graslandkalender wilt gebruiken. </p>
+        <a id="add_farm" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Bedrijf
+            toevoegen</a>
+        <br>
+        <br>
+
+        <!-- modal for add new bedrijf  -->
+        <div id="bedrijf_modal" class="ui basic modal">
+            <div class="modal-content">
+                <h5>Bedrijf toevoegen</h5>
+                <div class="divider"></div>
+                <form id='modal_form'>
+                    <div class="input-field col s12">
+                        <input id="farm_name_add" type="text" class="validate">
+                        <label for="farm_name_add">Bedrijfsnaam</label>
+                    </div>
+
+                </form>
+            </div>
+            <br>
+            <div class="modal-footer">
+                <a id="save_farmnew" href="#!" class="modal-close waves-effect waves-green btn-flat">Bedrijf
+                    toevoegen</a>
+            </div>
+        </div>
+
+        <br>
+        <div class="divider"></div>
+        <br>
+
+        <h5>Instellingen account</h5>
+        <p>Log uit om in te loggen bij een ander account of om een nieuw account te registreren. </p>
+        <br>
+        <div>
+            <a id='uitloggen' href="uitloggen" class="waves-effect waves-light btn"><i
+                    class="material-icons left">exit_to_app</i>Uitloggen</a>
+        </div>
+        <br>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+/* Set position for the pages */
+header, main, footer, .content {
+    padding-left: 300px;
+}
+
+
+#container {
+    padding-left: 300px;
+}
+
+
+
+  
+@media only screen and (max-width : 992px) {
+    header, main, footer, .content {
+        padding-left: 0;
+    }
+
+    #container {
+        padding-left: 0px;
+    }
+}
+
+/* .chart-container {
+    position: relative; 
+    height:65vh
+} */
+
+
+
+/* Set colors for the pages */
+body {
+    background-color: #efebe9;
+}
+
+.top-nav {
+    background-color: #405d27; /*Brown lighten-1*/
+}
+
+
+.btn {
+    background-color: #82b74b; /*deep-orange darken-1*/
+}
+.btn-small {
+    background-color: #808080; /*gray*/
+}
+
+.collapsible-body {
+    background-color: #ffffff; /*White*/
+}
+
+.collapsible-header {
+    background-color: #82b74b; /*deep-orange darken-1*/
+}
+
+span.badge.new {
+    background-color: #82b74b
+}
+
+.btn-floating {
+    background-color: #3e4444;
+  }
+
+#map {
+    padding-top: 65px;
+    height: calc(100vh - 65px)
+}
+#map2 {
+    padding-top: 65px;
+    height: 50vh
+}
+
+.brand-logo > span,.brand-logo > img{
+    vertical-align: middle;
+    /* display: flex;
+    align-items: center;
+    justify-content: flex-start; */
+ }
+
+#footer {
+    position: fixed;
+    top: 100vh; left: 0;
+    margin-top: -100px;
+    width: 100%; height: 100px;
+    padding: 10px;
+    color: #fff; background-color: rgba(0,0,0,0.6);
+  }
+
+

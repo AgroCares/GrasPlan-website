@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+  <title>GrasPlan</title>
+  <meta name="description"
+    content="Verbeter uw graslandbeheer met de graslandgebruikskalender van GrasPlan. Eenvoudig overzicht van uw grasmanagement!">
+
+  <%- include("../partials/meta") %>
+
+  <script src="js/index.js" defer></script>
+</head>
+
+<body>
+  <%- include("../partials/menu") %>
+
+
+  <!--Content voor de beginpagina -->
+  <div id="container" class="container">
+
+    <p class="flow-text">
+      Grasplan is een applicatie die is gebaseerd op de graslandgebruikskalender. 
+      Alle acties die plaatsvinden voor het graslandbeheer worden overzichtelijk weergegeven.
+
+    </p>
+
+    <br>
+    <div class="slider">
+      <ul class="slides">
+        <li>
+          <img src="img/gras2.jpg"> <!-- random image -->
+          <div class="caption center-align">
+            <h3>Een digitale graslandgebruikskalender</h3>
+            <h5 class="light grey-text text-lighten-3">Eenvoudig bijhouden van al uw acties op uw percelen.</h5>
+          </div>
+        </li>
+        <li>
+          <img src="img/gras3.png"> <!-- random image -->
+          <div class="caption center-align">
+            <h3>De nieuwe grasplan is online!</h3>
+            <h5 class="light grey-text text-lighten-3">Snel en gemakkelijk overzicht van uw graslandbeheer.</h5>
+          </div>
+        </li>
+        <li>
+          <img src="img/gras4.jpg"> <!-- random image -->
+          <div class="caption center-align">
+            <h3>Uw papieren graslandgebruikskalender is nu digitaal</h3>
+            <h5 class="light grey-text text-lighten-3">Eenvoudig inzicht het beheer van uw graslandpercelen.</h5>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <br>
+
+    <% if (logged_in) { %>
+    <div class="row">
+      <a class="waves-effect waves-light btn btn-block" href="farm"><i class="material-icons left">home_work</i>Bedrijf
+        en percelen</a>
+    </div>
+    <div class="row">
+      <a class="waves-effect waves-light btn btn-block" href="calendar"><i
+          class="material-icons left">line_style</i>Graslandkalender</a>
+    </div>
+    <% } else { %>
+    <div class="row">
+      <a class="waves-effect waves-light btn btn-block" href="login">Inloggen</a>
+    </div>
+
+    <div class="row">
+      <a href="register" class="waves-effect waves-light btn">Registreren</a>
+    </div>
+    <% } %>
+
+  </div>
+</body>
+
+</html>

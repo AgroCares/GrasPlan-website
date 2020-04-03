@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+    <title>Voeg actie toe | GrasPlan</title>
+    <meta name="description" content="Voeg beweiden, bemesten of maaien toe aan uw kalender">
+
+    <%- include("../partials/meta") %>
+
+    <script src="js/create_event.js" defer></script>
+
+</head>
+
+<body>
+
+    <%- include("../partials/menu") %>
+
+
+    <!--Content voor de event pagina -->
+    <div id="container" class="container">
+        <h5>1. Selecteer actie</h5>
+        <br>
+        <form id="form_event">
+            <div class="input-field col s12">
+                <select id="event_selected">
+                    <option value="" disabled selected>Selecteer actie</option>
+                    <option value="maaien">Maaien</option>
+                    <option value="beweiden">Beweiden</option>
+                    <option value="bemesten_dierlijk">Bemesten met dierlijke mest</option>
+                    <option value="bemesten_kunst">Bemesten met kunstmest</option>
+                    <option value="pesticidegebruik">Pesticidegebruik</option>
+                    <option value="natuurmaatregel">Beheermaatregel</option>
+                    <option value="graslandvernieuwing">Graslandvernieuwing</option>
+                </select>
+            </div>
+        </form>
+
+
+        <br>
+
+
+        <form id="form_percelen" class="hide">
+            <h5> 2. Selecteer zones</h5>
+            <br>
+            <div class="row col s12">
+                <select id="fields_selected" multiple>
+                    <option name="option_default" value="" disabled>Selecteer zones</option>
+                </select>
+                <label>Selecteer percelen</label>
+            </div>
+            <a id="btn_select_all_zones" class="btn">Selecteer alle zones</a>
+        </form>
+        <form id="form_percelen_fieldsonly" class="hide">
+            <h5> 2. Selecteer percelen</h5>
+            <br>
+            <div class="row col s12">
+                <select id="fields_selected_fieldsonly" multiple>
+                    <option name="option_default" value="" disabled>Selecteer percelen</option>
+                </select>
+                <label>Selecteer percelen</label>
+            </div>
+            <a id="btn_select_all_fields" class="btn">Selecteer alle percelen</a>
+        </form>
+
+        <br>
+        <br>
+
+
+
+
+    </div>
+
+    <div id="container" class="container">
+        <form id="form_mowing" class="hide">
+            <h5>3. Datum toevoegen</h5>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="maaidatum" type="text" class="datepicker validate" required>
+                    <label for="maaidatum">Maaidatum</label>
+                </div>
+            </div>
+            <a id="save_maaien" class="waves-effect waves-light btn">Maaien toevoegen <i
+                    class="material-icons left">add</i></a>
+        </form>
+
+        <form id="form_fertilisation_manure" class="hide">
+            <h5>3. Bemesten met dierlijke mest toevoegen</h5>
+            <div class="row">
+                <div class="row col s12">
+                    <select id="mestsoort_dierlijk">
+                        <option value="" diabled>Selecteer mestsoort</option>
+                    </select>
+                    <label for="mestsoort_dierlijk">Wat wordt er bemest?</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="hoeveelheid_dierlijk" type="number" class="validate" min=0>
+                    <label for="hoeveelheid_dierlijk">Hoeveelheid (ton mest / ha)</label>
+                </div>
+                <div class="col s6 input-field">
+                    <input id="datum_bemesten_dierlijk" type="text" class="datepicker">
+                    <label for="datum_bemesten_dierlijk">Datum bemesten</label>
+                </div>
+            </div>
+            <a id="save_bemesten_dierlijk" class="waves-effect waves-light btn">Bemesten toevoegen <i
+                    class="material-icons left">add</i></a>
+        </form>
+
+        <form id="form_fertilisation_artificial" class="hide">
+            <h5>3. Bemesten met kunstmest toevoegen</h5>
+            <div class="row">
+                <div class="row col s12">
+                    <select id="mestsoort_kunst">
+                        <option value="" diabled>Selecteer mestsoort</option>
+                    </select>
+                    <label for="mestsoort_kunst">Wat wordt er bemest?</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="hoeveelheid_kunst" type="number" class="validate" min=0>
+                    <label for="hoeveelheid_kunst">Hoeveelheid (kg product / ha)</label>
+                </div>
+                <div class="col s6 input-field">
+                    <input id="datum_bemesten_kunst" type="text" class="datepicker">
+                    <label for="datum_bemesten_kunst">Datum bemesten</label>
+                </div>
+            </div>
+            <a id="save_bemesten_kunst" class="waves-effect waves-light btn">Bemesten toevoegen <i
+                    class="material-icons left">add</i></a>
+        </form>
+
+
+        <form id="form_grazing" class="hide">
+            <h5>3. Beweiden toevoegen</h5>
+            <br>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <select id='diergroep'>
+                        <option value="melkvee">melkvee</option>
+                        <option value="droogvee">droge koeien</option>
+                        <option value="pinken">pinken</option>
+                        <option value="kalveren">kalveren</option>
+                        <option value="schapen">schapen</option>
+                    </select>
+                    <label for="diergroep">Welke diergroep</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="dieraantal" type="number" class="validate" min=0>
+                    <label for="dieraantal">Aantal dieren (optioneel) </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="wei_start" type="text" class="datepicker validate" required>
+                    <label for="wei_start">Datum start weiden</label>
+                </div>
+                <div class="col s6 input-field">
+                    <input id="wei_eind" type="text" class="datepicker validate">
+                    <label for="wei_eind">Datum eind weiden</label>
+                </div>
+            </div>
+            <a id="save_beweiden" class="waves-effect waves-light btn">Beweiden toevoegen <i
+                    class="material-icons left">add</i></a>
+
+        </form>
+
+
+        <form id="form_pesticidation" class="hide">
+
+            <h5>3. Pesticidegebruik toevoegen</h5>
+            <br>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="datum_pesticide" type="text" class="datepicker validate" required>
+                    <label for="datum_pesticide">Datum pesticidegebruik</label>
+                </div>
+            </div>
+            <a id="save_pesticide" class="waves-effect waves-light btn">Pesticidegebruik toevoegen <i
+                    class="material-icons left">add</i></a>
+
+        </form>
+        <form id="form_natuurmaatregel" class="hide">
+
+            <h5>3. Beheermaatregel toevoegen</h5>
+            <br>
+            <div class="row col s12">
+                <select id="natuurmaatregel_select">
+                    <option value="" disabled>Selecteer maatregel</option>
+                </select>
+                <label>Selecteer maatregel</label>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="datum_nature" type="text" class="datepicker validate" required>
+                    <label for="datum_nature">Datum maatregel</label>
+                </div>
+            </div>
+            <a id="save_nature" class="waves-effect waves-light btn">Beheermaatregel toevoegen <i
+                    class="material-icons left">add</i></a>
+
+        </form>
+
+        <form id="form_renewal" class="hide">
+
+            <h5>3. Graslandvernieuwing toevoegen</h5>
+            <br>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="datum_renewal" type="text" class="datepicker validate" required>
+                    <label for="datum_renewal">Datum graslandvernieuwing</label>
+                </div>
+            </div>
+            <a id="save_renewal" class="waves-effect waves-light btn">Graslandvernieuwing toevoegen <i
+                    class="material-icons left">add</i></a>
+
+        </form>
+
+
+    </div>
+</body>
+
+</html>

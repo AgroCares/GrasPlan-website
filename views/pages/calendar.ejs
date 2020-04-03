@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+    <title>Kalender | GrasPlan</title>
+    <meta name="description" content="De graslandkalender voor uw bedrijf">
+
+    <%- include("../partials/meta") %>
+    <!-- Load plotly -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.51.1/plotly.min.js"
+        integrity="sha256-qe/oN+ddr+wOzXyDWGSx8glJYbdQk2FwExwyQgNMsdQ=" crossorigin="anonymous"></script>
+
+    <!-- Load plotly gantchart -->
+    <script src="js/calendar.js" defer></script>
+
+    <!-- Slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.3/nouislider.min.js"
+        integrity="sha256-1ubcV7PzqcMhAz7jsoU3QlAfCnUaY7SUffeHa4Nq3ws=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.3/nouislider.min.css"
+        integrity="sha256-IQnSeew8zCA+RvM5fNRro/UY0Aib18qU2WBwGOHZOP0=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js"
+        integrity="sha256-DkHIFUKQfqQ7jA6GnWR9ZyB4Jb+j+dOuY12vnYq8xjk=" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+    <%- include("../partials/menu") %>
+
+    <!--Content voor de event pagina -->
+
+    <div class="content">
+        <br>
+        <div class="col offset-s6">
+            <div id="timeline_plotly"> </div>
+        </div>
+    </div>
+
+    <div id="event_modal" class="ui basic modal">
+
+        <div id='modalcontent' class="modal-content">
+            <div class="divider"></div>
+
+        </div>
+        <div class="modal-footer">
+            <a id="" href="#!" class="modal-close waves-effect waves-green btn-flat">Annuleren</a>
+            <a id="delete_event" href="#!" class="waves-effect waves-green btn-flat">Actie verwijderen</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

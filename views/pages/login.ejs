@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+    <title>Login | GrasPlan</title>
+    <meta name="description" content="Login bij GrasPlan voor graslandsgebruikskalender">
+
+    <%- include("../partials/meta") %>
+
+    <script src="js/login.js" defer></script>
+
+
+</head>
+
+<body>
+
+    <%- include("../partials/menu") %>
+
+
+    <!--Content voor de login -->
+    <div id="container" class="container content">
+        <h3>Inloggen</h3>
+        <div class="row">
+            <form id="form_login" class="col s12">
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input id="email" type="email" class="validate" required>
+                        <label for="email">E-mailadres</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input id="password" type="password" class="validate" required>
+                        <label for="password">Wachtwoord</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <div id="div_submit">
+                        </div>
+                        <div id="icon-loading" class="preloader-wrapper small active hide">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <br>
+                            <a href="#" id="forgot_password">Wachtwoord vergeten?</a>
+                        </div>
+                        <div class="row">
+                            <p>Nog geen account? Registreer hier</p>
+                            <a href="register" class="waves-effect waves-light btn">Registreren</a>
+                        </div>
+
+                        <div id="text_unsuccessfull" class="hide">
+                            tekst als inlog niet juist
+                        </div>
+                    </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<header>
+
+  <nav class="top-nav">
+    <div class="container">
+      <div id='navbar' class="nav-wrapper">
+        <a href="calendar" class="brand-logo center"><img style='height: 5.5vh;  object-fit: contain'
+            src="img/grasplan_witgroen.png" /></a>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <ul class="sidenav sidenav-fixed" id="slide-out">
+      <li>
+        <div id="nav-head" class="user-view">
+          <div class="row">
+            <img id="logo_os_balans" src="img/gras.png" class="col s10 offset-s2" alt="" />
+            <br />
+          </div>
+        </div>
+      </li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li class="bold">
+            <div>
+              <ul>
+                <li>
+                  <div class="divider"></div>
+                </li>
+                <% if (logged_in) { %>
+                <li>
+                  <a href="create_event">
+                    <i class="material-icons left">add</i>
+                    Voeg actie toe</a>
+                </li>
+                <li>
+                  <a href="calendar">
+                    <i class="material-icons left">event</i> Kalender</a>
+                </li>
+                <li>
+                  <div class="divider"></div>
+                </li>
+                <li>
+                  <a href="farm">
+                    <i class="material-icons left">home_work</i> Bedrijf</a>
+                </li>
+
+                <li>
+                  <a href="overzicht">
+                    <i class="material-icons left">account_circle</i>
+                    Account</a>
+                </li>
+                <li>
+                  <a id="a_logout" href="#">
+                    <i class="material-icons left">exit_to_app</i>
+                    Uitloggen</a>
+                </li>
+                <% } else { %>
+                <li>
+                  <a href="login">
+                    <i class="material-icons left"></i>
+                    Inloggen</a>
+                </li>
+                <li>
+                  <a href="register">
+                    <i class="material-icons left"></i>
+                    Registreren</a>
+                </li>
+                <% } %>
+                <li>
+                  <div class="divider"></div>
+                </li>
+                <li>
+                  <a href="info">
+                    <i class="material-icons left">info</i>
+                    Over GrasPlan</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <div class="divider"></div>
+      </li>
+      <br />
+      <li>
+        <div class="row">
+          <img id="logo_nmi" src="img/logo_nmi.jpg" class="col s8 offset-s2 " alt="Logo van NMI" />
+        </div>
+      </li>
+    </ul>
+  </div>
+</header>

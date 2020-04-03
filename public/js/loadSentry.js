@@ -1,0 +1,1 @@
+Sentry.init({ dsn: 'https://fe5b9d40520f4c0594d0b037ee7eb18e@sentry.io/4573158' });

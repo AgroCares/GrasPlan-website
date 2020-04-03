@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+    <title>Bedrijf | GrasPlan</title>
+    <meta name="description" content="Login bij GrasPlan voor graslandsgebruikskalender">
+
+    <%- include("../partials/meta") %>
+
+    <!-- Load leaflet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css"
+        integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js"
+        integrity="sha256-fNoRrwkP2GuYPbNSJmMJOCyfRB2DhPQe0rGTgzRsyso=" crossorigin="anonymous"></script>
+
+    <!-- Datatables -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"
+        integrity="sha256-t5ZQTZsbQi8NxszC10CseKjJ5QeMw5NINtOXQrESGSU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/jquery.dataTables.min.css"
+        integrity="sha256-YY1izqyhIj4W3iyJOaGWOpXDSwrHWFL4Nfk+W0LyCHE=" crossorigin="anonymous" />
+
+
+    <!-- Load javascript functions -->
+    <script src="js/farm.js" defer></script>
+
+</head>
+
+<body>
+
+    <%- include("../partials/menu") %>
+
+    <!--Content voor de beginpagina -->
+    <div class="container content">
+        <br>
+        <div id="bedrijfsnaam"> </div>
+        <div class="col s12">
+            <div class="row">
+                <table id="table" class="display" width="80%"></table>
+            </div>
+            <br>
+            <a id="to_percelen" href="percelen" class="waves-effect waves-light btn"><i
+                    class="material-icons left">map</i>Voeg percelen toe</a>
+            <br>
+        </div>
+        <div class="col s12">
+            <br>
+            <div id="map2"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
