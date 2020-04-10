@@ -191,7 +191,7 @@ saveMowing = function () {
             window.location.href = 'calendar';
           } else {
             console.log("Unsuccesfull adding mowing");
-            let text = "Fout bij toevoegen maaien.";
+            let text = "Er is iets fout gegaan bij het toevoegen van maaien";
             M.toast({ html: text });
           }
         })
@@ -233,7 +233,7 @@ saveGrazing = function () {
               window.location.href = 'calendar';
             } else {
               console.log("Unsuccesfull adding grazing");
-              let text = "Fout bij toevoegen beweiden.";
+              let text = "Er is iets fout gegaan bij het toevoegen van beweiding";
               M.toast({ html: text });
             }
           })
@@ -268,25 +268,29 @@ saveFertilisation = function (type) {
         data.prd_id = $('#mestsoort_kunst').val();
       }
 
-      axios({
-        method: "post",
-        url: "/api_fertilising_add",
-        data: data
-      })
-        .then(function (res) {
+      if (data.prd_id == null || data.prd_id == "") {
+        M.toast({ html: 'U heeft geen mestproduct geselecteerd. Vul eerst een mestproduct in' });
+      } else if (data.amount == null || data.amount == "") {
+        M.toast({ html: 'U heeft geen hoeveelheid ingevuld. Vul eerst een hoeveelheid in' });
+      } else {
+        axios({
+          method: "post",
+          url: "/api_fertilising_add",
+          data: data
+        }).then(function (res) {
 
           if (res.data.success) {
             console.log("addition fertilising was succesfull");
             window.location.href = 'calendar';
           } else {
             console.log("Unsuccesfull adding fertilising");
-            let text = "Fout bij toevoegen fertilising.";
+            let text = "Er is iets fout gegaan bij het toevoegen van bemesting";
             M.toast({ html: text });
           }
-        })
-        .catch(function (err) {
+        }).catch(function (err) {
           console.log(err);
         });
+      }
     });
   }
 };
@@ -317,7 +321,7 @@ savePesticidation = function () {
             window.location.href = 'calendar';
           } else {
             console.log("Unsuccesfull adding pesticidation");
-            let text = "Fout bij toevoegen pesticidegebruik";
+            let text = "Er is iets fout gegaan bij het toevoegen van pesticidegebruik";
             M.toast({ html: text });
           }
         })
@@ -343,25 +347,27 @@ saveNature = function () {
         nature_measure_date: $('#datum_nature').val()
       };
 
-      axios({
-        method: "post",
-        url: "/api_nature_add",
-        data: data
-      })
-        .then(function (res) {
+      if (data.nature_measure_id == null || data.nature_measure_id == "") {
+        M.toast({ html: 'U heeft geen beheersmaatregel gekozen. Selecteer eerst een beheersmaatregel' });
+      } else {
+        axios({
+          method: "post",
+          url: "/api_nature_add",
+          data: data
+        }).then(function (res) {
 
           if (res.data.success) {
             console.log("addition nature measure was succesfull");
             window.location.href = 'calendar';
           } else {
             console.log("Unsuccesfull adding nature measure ");
-            let text = "Fout bij toevoegen beheermaatregel .";
+            let text = "Er is iets fout gegaan bij het toevoegen van beheermaatregel";
             M.toast({ html: text });
           }
-        })
-        .catch(function (err) {
+        }).catch(function (err) {
           console.log(err);
         });
+      }
     });
   }
 };
@@ -391,7 +397,7 @@ saveRenewal = function () {
             window.location.href = 'calendar';
           } else {
             console.log("Unsuccesfull addinggrassland renewal");
-            let text = "Fout bij toevoegen graslandvernieuwing .";
+            let text = "Er is iets fout gegaan bij het toevoegen van graslandvernieuwing";
             M.toast({ html: text });
           }
         })
