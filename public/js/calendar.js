@@ -35,7 +35,7 @@ modalEvent = function (actie) {
   $("#event_mod_head").empty();
   $('#modalcontent').empty();
   $('#modalcontent').append('<h5> ' + actie.actie + '</h5>');
-  $('#modalcontent').append('<p>Hier komt later gedetailleerde infomatie over uw actie. Vooralsnog kunt u met de knop hieronder de actie verwijderen</p>');
+  $('#modalcontent').append('<p>'+ actie.name +'</p>');
   $("#event_modal").modal("open");
 
   $("#delete_event").on("click", function (e) {
@@ -295,7 +295,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over maaien",
+            name: '<b>Maaidatum:</b> '+ formatDate(item.mow_date, 0),
             text: 'Maaien',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -323,7 +323,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over beweiden ",
+            name: '<b>Begindatum beweiden:</b> '+ formatDate(item.gra_start_date, 0) + '<br><b>Einddatum beweiden:</b> '+ formatDate(item.gra_end_date, 0) +'<br><b>Type vee:</b> '+ item.lca_name_nl +'<br><b>Aantal dieren:</b> '+ item.gra_count,
             text: 'Beweiden',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -351,7 +351,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over maaien",
+            name: '<b>Bemestingsdatum:</b> '+ formatDate(item.fer_date, 0),
             text: 'Bemesten',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -378,7 +378,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over pesticide",
+            name: '<b>Datum van pesticidegebruik:</b> '+ formatDate(item.pes_date, 0),
             text: 'Pesticidegebruik',
             hoverinfo: "x+text",
             uid: "c2e171",
