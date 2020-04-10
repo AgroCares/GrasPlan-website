@@ -428,9 +428,9 @@ make_timeline = function (fields) {
             fillcolor: color_renewal
           });
           data_plot.push({
-            actie: 'Graslandvernwieuwing',
+            actie: 'Graslandvernieuwing',
             id: item.nma_id,
-            x: [formatDate(item.nma_date, 0), formatDate(item.nma_date, 0)],
+            x: [formatDate(item.gre_date, 0), formatDate(item.gre_date, 0)],
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
