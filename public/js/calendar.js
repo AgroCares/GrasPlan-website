@@ -351,7 +351,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: '<b>Bemestingsdatum:</b> '+ formatDate(item.fer_date, 0),
+            name: '<b>Bemestingsdatum:</b> '+ formatDate(item.fer_date, 0) + '<br><b>Bemestingsproduct:</b> '+ item.prd_name + '<br><b>Bemestingshoeveelheid:</b> '+ item.fer_amount +' kg per hectare',
             text: 'Bemesten',
             hoverinfo: "x+text",
             uid: "c2e171",
