@@ -239,7 +239,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: '<b>Begindatum beweiden:</b> '+ formatDate(item.gra_start_date, 0) + '<br><b>Einddatum beweiden:</b> '+ formatDate(item.gra_end_date, 0) +'<br><b>Type vee:</b> '+ item.lca_name_nl +'<br><b>Aantal dieren:</b> '+ item.gra_count,
+            name: '<b>Begindatum beweiden:</b> '+ formatDate(item.gra_start_date, 0) + '<br><b>Einddatum beweiden:</b> '+ formatDate(item.gra_end_date, 0) +'<br><b>Diergroep:</b> '+ item.lca_name_nl +'<br><b>Aantal dieren:</b> '+ item.gra_count,
             text: 'Beweiden',
             hoverinfo: "x+text",
             uid: "c2e171",
