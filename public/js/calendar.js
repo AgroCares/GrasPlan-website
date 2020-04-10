@@ -306,7 +306,12 @@ make_timeline = function (fields) {
       // events for grazing
       if (zone.grazing.length > 0) {
         zone.grazing.forEach(item => {
-          // console.log(zone.grazing)
+          if (item.lca_name_nl == null) {
+            item.lca_name_nl = "Onbekend";
+          }
+          if (item.gra_count == null) {
+            item.gra_count  = "Onbekend";
+          }
           actions.push({
             // actie: 'weiden',
             x0: formatDate(item.gra_start_date, 0),
@@ -335,6 +340,12 @@ make_timeline = function (fields) {
       // events for fertilizing 
       if (zone.fertilization.length > 0) {
         zone.fertilization.forEach(item => {
+          if (item.prd_name == null) {
+            item.prd_name  = "Onbekend";
+          }
+          if (item.fer_amount == null) {
+            item.fer_amount = "Onbekend";
+          }
           actions.push({
             x0: formatDate(item.fer_date, 0),
             x1: formatDate(item.fer_date, 1),
