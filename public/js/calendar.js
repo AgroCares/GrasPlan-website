@@ -144,10 +144,52 @@ deleteEvent = function (eventType, eventId) {
         console.log(err);
       });
   } else if (eventType == 'Beheermaatregelen') {
-    M.toast({ html: "Het verwijderen van beheermaatregelen is nog niet beschikbaar" });
+    axios({
+      method: "post",
+      url: "/api_nature_measure_delete",
+      data: { eventId: eventId }
+    })
+      .then(function (res) {
 
-  } else if (eventType == 'Graslandvernwieuwing') {
-    M.toast({ html: "Het verwijderen van graslandvernieuwing is nog niet beschikbaar" });
+        if (res.data.success) {
+          // Successful response
+          console.log("delete nature measures succesfull");
+          window.location.href = "calendar";
+
+        } else {
+          // Unsuccessful response
+          console.log("Unsuccesfull delete api_nature_measures_delete");
+          let text = "Fout bij verwijderen beheersmaatregel";
+          M.toast({ html: text });
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+  } else if (eventType == 'Graslandvernieuwing') {
+    axios({
+      method: "post",
+      url: "/api_grassland_renewal_delete",
+      data: { eventId: eventId }
+    })
+      .then(function (res) {
+
+        if (res.data.success) {
+          // Successful response
+          console.log("delete grassland renewal succesfull");
+          window.location.href = "calendar";
+
+        } else {
+          // Unsuccessful response
+          console.log("Unsuccesfull delete api_grassland_renewal_delete");
+          let text = "Fout bij verwijderen graslandvernieuwing";
+          M.toast({ html: text });
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
 
   } else {
     console.log("onbekende actie");
