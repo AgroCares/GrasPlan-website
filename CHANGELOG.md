@@ -1,5 +1,20 @@
 # Changelog GrasPlan-website
 
+## Versie 1.3.0 2020-04-10
+### Added
+* Als een gebruiker in de kalender klikt op een actie, dan verschijnen er details over die actie in een pop-up
+* Als een adviseur klikt op een actie in de kalender van een van zijn klanten dan zijn er details te zien over die actie
+* Het is mogelijk om een beheersmaatregel of graslandvernieuwing te verwijderen door de gebruiker
+* Bij toevoegen van bemesting wordt nu gecontroleerd of een product is geselecteerd en anders verschijnt er een foutmelding daarover
+* Bij toevoegen van bemesting wordt nu gecontroleerd of een hoeveelheid is ingevuld en anders verschijnt er een foutmelding daarover
+* Bij toevoegen van een beheersmaatregel wordt nu gecontroleerd of een maatregel is geselecteerd en anders verschijnt er een foutmelding daarover
+
+### Changed
+* De foutmeldingen bij het toevoegen van een actie zijn wat netter geformuleerd
+
+### Fixed
+* Graslandvernieuwing liet in de kalender een verkeerde datum zien.
+
 ## Version 1.2.1 2020-04-03
 ### Added
 * Een stukje tekst is toegevoegd dat GrasPlan mede is gefinancieerd door het EU Landbouwfonds

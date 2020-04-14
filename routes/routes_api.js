@@ -522,7 +522,41 @@ router.post('/api_pesticidation_delete', function (req, res) {
     }).then(response => {   
         res.send({ success: true, message: 'pesticidation deleting succesful' });
     }).catch(err => {
-        console.log('Fout bij deleting mowing event: '+ err    );
+        console.log('Fout bij deleting oesticidation event: '+ err    );
+        res.send({ success: false });
+    });
+});
+
+// Beheersmaatregel- Delete a Beheersmaatregel
+router.post('/api_nature_measure_delete', function (req, res) {
+    const session = req.signedCookies.gras_session;
+    const event = req.body.eventId;
+
+    axios({
+        method: 'delete',
+        url: base_url + 'nature_management/delete?session_id='+session+'&nature_management_id='+event,
+        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+    }).then(response => {   
+        res.send({ success: true, message: 'nature management deleting succesful' });
+    }).catch(err => {
+        console.log('Fout bij deleting nature management event: '+ err    );
+        res.send({ success: false });
+    });
+});
+
+// Graslandvernieuwing- Delete a Graslandvernieuwing
+router.post('/api_grassland_renewal_delete', function (req, res) {
+    const session = req.signedCookies.gras_session;
+    const event = req.body.eventId;
+
+    axios({
+        method: 'delete',
+        url: base_url + 'grassland_renewal/delete?session_id='+session+'&renewal_id='+event,
+        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+    }).then(response => {   
+        res.send({ success: true, message: 'nature management deleting succesful' });
+    }).catch(err => {
+        console.log('Fout bij deleting grassland renewal event: '+ err    );
         res.send({ success: false });
     });
 });

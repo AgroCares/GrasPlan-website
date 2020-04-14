@@ -35,7 +35,7 @@ modalEvent = function (actie) {
   $("#event_mod_head").empty();
   $('#modalcontent').empty();
   $('#modalcontent').append('<h5> ' + actie.actie + '</h5>');
-  $('#modalcontent').append('<p>Hier komt later gedetailleerde infomatie over uw actie. Vooralsnog kunt u met de knop hieronder de actie verwijderen</p>');
+  $('#modalcontent').append('<p>'+ actie.name +'</p>');
   $("#event_modal").modal("open");
 
   $("#delete_event").on("click", function (e) {
@@ -144,10 +144,52 @@ deleteEvent = function (eventType, eventId) {
         console.log(err);
       });
   } else if (eventType == 'Beheermaatregelen') {
-    M.toast({ html: "Het verwijderen van beheermaatregelen is nog niet beschikbaar" });
+    axios({
+      method: "post",
+      url: "/api_nature_measure_delete",
+      data: { eventId: eventId }
+    })
+      .then(function (res) {
 
-  } else if (eventType == 'Graslandvernwieuwing') {
-    M.toast({ html: "Het verwijderen van graslandvernieuwing is nog niet beschikbaar" });
+        if (res.data.success) {
+          // Successful response
+          console.log("delete nature measures succesfull");
+          window.location.href = "calendar";
+
+        } else {
+          // Unsuccessful response
+          console.log("Unsuccesfull delete api_nature_measures_delete");
+          let text = "Fout bij verwijderen beheersmaatregel";
+          M.toast({ html: text });
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+  } else if (eventType == 'Graslandvernieuwing') {
+    axios({
+      method: "post",
+      url: "/api_grassland_renewal_delete",
+      data: { eventId: eventId }
+    })
+      .then(function (res) {
+
+        if (res.data.success) {
+          // Successful response
+          console.log("delete grassland renewal succesfull");
+          window.location.href = "calendar";
+
+        } else {
+          // Unsuccessful response
+          console.log("Unsuccesfull delete api_grassland_renewal_delete");
+          let text = "Fout bij verwijderen graslandvernieuwing";
+          M.toast({ html: text });
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
 
   } else {
     console.log("onbekende actie");
@@ -295,7 +337,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over maaien",
+            name: '<b>Maaidatum:</b> '+ formatDate(item.mow_date, 0),
             text: 'Maaien',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -306,7 +348,12 @@ make_timeline = function (fields) {
       // events for grazing
       if (zone.grazing.length > 0) {
         zone.grazing.forEach(item => {
-          // console.log(zone.grazing)
+          if (item.lca_name_nl == null) {
+            item.lca_name_nl = "Onbekend";
+          }
+          if (item.gra_count == null) {
+            item.gra_count  = "Onbekend";
+          }
           actions.push({
             // actie: 'weiden',
             x0: formatDate(item.gra_start_date, 0),
@@ -323,7 +370,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over beweiden ",
+            name: '<b>Begindatum beweiden:</b> '+ formatDate(item.gra_start_date, 0) + '<br><b>Einddatum beweiden:</b> '+ formatDate(item.gra_end_date, 0) +'<br><b>Diergroep:</b> '+ item.lca_name_nl +'<br><b>Aantal dieren:</b> '+ item.gra_count,
             text: 'Beweiden',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -335,6 +382,12 @@ make_timeline = function (fields) {
       // events for fertilizing 
       if (zone.fertilization.length > 0) {
         zone.fertilization.forEach(item => {
+          if (item.prd_name == null) {
+            item.prd_name  = "Onbekend";
+          }
+          if (item.fer_amount == null) {
+            item.fer_amount = "Onbekend";
+          }
           actions.push({
             x0: formatDate(item.fer_date, 0),
             x1: formatDate(item.fer_date, 1),
@@ -351,7 +404,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over maaien",
+            name: '<b>Bemestingsdatum:</b> '+ formatDate(item.fer_date, 0) + '<br><b>Bemestingsproduct:</b> '+ item.prd_name + '<br><b>Bemestingshoeveelheid:</b> '+ item.fer_amount +' kg per hectare',
             text: 'Bemesten',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -378,7 +431,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over pesticide",
+            name: '<b>Datum van pesticidegebruik:</b> '+ formatDate(item.pes_date, 0),
             text: 'Pesticidegebruik',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -406,7 +459,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over nature management",
+            name: '<b>Datum van beheermaatregel:</b> '+ formatDate(item.nma_date, 0) +'<br><b>Beheermaatregel:</b> '+ item.lnm_measure_nl,
             text: 'Beheermaatregelen',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -428,13 +481,13 @@ make_timeline = function (fields) {
             fillcolor: color_renewal
           });
           data_plot.push({
-            actie: 'Graslandvernwieuwing',
+            actie: 'Graslandvernieuwing',
             id: item.nma_id,
-            x: [formatDate(item.nma_date, 0), formatDate(item.nma_date, 0)],
+            x: [formatDate(item.gre_date, 0), formatDate(item.gre_date, 0)],
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: "hier extra info over graslandverniewing",
+            name: '<b>Datum van graslandvernieuwing:</b> '+ formatDate(item.gre_date, 0),
             text: 'Graslandvernieuwing',
             hoverinfo: "x+text",
             uid: "c2e171",
