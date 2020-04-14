@@ -1,5 +1,12 @@
 # Changelog GrasPlan-website
 
+## Versie 1.3.1 2020-04-14
+### Added
+* Bij het toevoegen van een actie is er nu een knop om alle percelen/zones te deselecteren
+
+### Fixed
+* In de kalender verschijnt nu wel een streepje wanneer er 1 dag wordt beweid
+
 ## Versie 1.3.0 2020-04-10
 ### Added
 * Als een gebruiker in de kalender klikt op een actie, dan verschijnen er details over die actie in een pop-up
