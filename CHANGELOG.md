@@ -4,6 +4,9 @@
 ### Added
 * Bij het toevoegen van een actie is er nu een knop om alle percelen/zones te deselecteren
 
+### Changed
+* De mobiele versie van de kalendar laat niet meer een template tabel zien, maar de tekst dat de mobiele versie voor de kalendar nog niet beschikbaar is
+
 ### Fixed
 * In de kalender verschijnt nu wel een streepje wanneer er 1 dag wordt beweid
 
