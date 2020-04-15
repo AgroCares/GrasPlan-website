@@ -354,10 +354,14 @@ make_timeline = function (fields) {
           if (item.gra_count == null) {
             item.gra_count  = "Onbekend";
           }
+          let x1 = formatDate(item.gra_end_date, 0)
+          if (item.gra_end_date == item.gra_start_date) {
+            x1 = formatDate(item.gra_end_date, 1);
+          }
           actions.push({
             // actie: 'weiden',
             x0: formatDate(item.gra_start_date, 0),
-            x1: formatDate(item.gra_end_date, 0),
+            x1: x1,
             y0: zone_list.findIndex(x => x.id == zone.zon_id) - 0.4,
             y1: zone_list.findIndex(x => x.id == zone.zon_id) + 0.4,
             line: { width: 0 },

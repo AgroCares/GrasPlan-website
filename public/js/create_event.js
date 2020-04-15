@@ -76,11 +76,19 @@ $(document).ready(async function () {
   });
 
   $('#btn_select_all_zones').on('click', function (e) {
-    selectAll(options = 'zones');
+    setAllFieldsToSelectOrDeselect(options = 'zones', set_select = true);
   });
 
   $('#btn_select_all_fields').on('click', function (e) {
-    selectAll(options = 'fields');
+    setAllFieldsToSelectOrDeselect(options = 'fields', set_select = true);
+  });
+
+  $('#btn_deselect_all_fields').on('click', function (e) {
+    setAllFieldsToSelectOrDeselect(options = 'fields', set_select = false);
+  });
+
+  $('#btn_deselect_all_zones').on('click', function (e) {
+    setAllFieldsToSelectOrDeselect(options = 'zones', set_select = false);
   });
 
 
@@ -483,7 +491,7 @@ showFormEvent = function () {
 };
 
 // When clicking on the button 'selecteer alles' 
-selectAll = function (options) {
+setAllFieldsToSelectOrDeselect = function (options, set_select) {
 
   // Get the right div
   let div_select = null;
@@ -494,10 +502,10 @@ selectAll = function (options) {
   }
 
   // Enable all options
-  div_select.prop('selected', true);
+  div_select.prop('selected', set_select);
 
   // Disable default option
-  $('[name="option_default"]').prop('selected', false);
+  $('[name="option_default"]').prop('selected', ! set_select);
 
   $('select').formSelect();
 
