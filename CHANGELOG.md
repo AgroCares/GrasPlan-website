@@ -1,5 +1,10 @@
 # Changelog GrasPlan-website
 
+## Versie 1.3.2 2020-04-22
+### Added
+* Een korte uitleg over zones is toegevoegd bij de keuze of zones gebruikt of niet
+* Bij het toevoegen van beheermaatregelen is een stuk tekst toegevoegd die vertelt dat deze maatregelen bedoeld zijn de GLB-pilot
+
 ## Versie 1.3.1 2020-04-14
 ### Added
 * Bij het toevoegen van een actie is er nu een knop om alle percelen/zones te deselecteren
