@@ -70,6 +70,11 @@ span.badge.new {
     height: 50vh
 }
 
+.explain-zones {
+   font-size: small;
+   color: lightslategray;
+}
+
 .brand-logo > span,.brand-logo > img{
     vertical-align: middle;
     /* display: flex;
