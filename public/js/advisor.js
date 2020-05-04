@@ -49,7 +49,7 @@ fillFarmTable = async function () {
 modalEvent = function (actie) {
   $("#event_mod_head").empty();
   $('#event_mod_head').append('<h5> ' + actie.actie + '</h5>');
-  $('#modalcontent').append('<p>'+ actie.name +'</p>');
+  $('#modalcontent').append('<p>' + actie.name + '</p>');
   $("#event_modal").modal("open");
 
 };
@@ -130,6 +130,9 @@ make_timeline = function (fields) {
     };
   });
 
+  //Sort zone_list alphabetically
+  zone_list.sort((a, b) => (a.color > b.color) ? 1 : -1);
+
   // Define data list with actions
   let actions = [];
 
@@ -206,7 +209,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: '<b>Maaidatum:</b> '+ formatDate(item.mow_date, 0),
+            name: '<b>Maaidatum:</b> ' + formatDate(item.mow_date, 0),
             text: 'Maaien',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -221,7 +224,7 @@ make_timeline = function (fields) {
             item.lca_name_nl = "Onbekend";
           }
           if (item.gra_count == null) {
-            item.gra_count  = "Onbekend";
+            item.gra_count = "Onbekend";
           }
           actions.push({
             // actie: 'weiden',
@@ -239,7 +242,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: '<b>Begindatum beweiden:</b> '+ formatDate(item.gra_start_date, 0) + '<br><b>Einddatum beweiden:</b> '+ formatDate(item.gra_end_date, 0) +'<br><b>Diergroep:</b> '+ item.lca_name_nl +'<br><b>Aantal dieren:</b> '+ item.gra_count,
+            name: '<b>Begindatum beweiden:</b> ' + formatDate(item.gra_start_date, 0) + '<br><b>Einddatum beweiden:</b> ' + formatDate(item.gra_end_date, 0) + '<br><b>Diergroep:</b> ' + item.lca_name_nl + '<br><b>Aantal dieren:</b> ' + item.gra_count,
             text: 'Beweiden',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -252,7 +255,7 @@ make_timeline = function (fields) {
       if (zone.fertilization.length > 0) {
         zone.fertilization.forEach(item => {
           if (item.prd_name == null) {
-            item.prd_name  = "Onbekend";
+            item.prd_name = "Onbekend";
           }
           if (item.fer_amount == null) {
             item.fer_amount = "Onbekend";
@@ -273,7 +276,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: '<b>Bemestingsdatum:</b> '+ formatDate(item.fer_date, 0) + '<br><b>Bemestingsproduct:</b> '+ item.prd_name + '<br><b>Bemestingshoeveelheid:</b> '+ item.fer_amount +' kg per hectare',
+            name: '<b>Bemestingsdatum:</b> ' + formatDate(item.fer_date, 0) + '<br><b>Bemestingsproduct:</b> ' + item.prd_name + '<br><b>Bemestingshoeveelheid:</b> ' + item.fer_amount + ' kg per hectare',
             text: 'Bemesten',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -300,7 +303,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: '<b>Datum van pesticidegebruik:</b> '+ formatDate(item.pes_date, 0),
+            name: '<b>Datum van pesticidegebruik:</b> ' + formatDate(item.pes_date, 0),
             text: 'Pesticidegebruik',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -328,7 +331,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: '<b>Datum van beheermaatregel:</b> '+ formatDate(item.nma_date, 0) +'<br><b>Beheermaatregel:</b> '+ item.lnm_measure_nl,
+            name: '<b>Datum van beheermaatregel:</b> ' + formatDate(item.nma_date, 0) + '<br><b>Beheermaatregel:</b> ' + item.lnm_measure_nl,
             text: 'Beheermaatregelen',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -356,7 +359,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zon_id),
             marker: { "color": color_invisible },
-            name: '<b>Datum van graslandvernieuwing:</b> '+ formatDate(item.gre_date, 0),
+            name: '<b>Datum van graslandvernieuwing:</b> ' + formatDate(item.gre_date, 0),
             text: 'Graslandvernieuwing',
             hoverinfo: "x+text",
             uid: "c2e171",
