@@ -253,6 +253,9 @@ make_timeline = function (fields) {
     }
   });
 
+  //Sort zone_list alphabetically
+  zone_list.sort((a, b) => (a.color > b.color) ? 1 : -1);
+
   // Define data list with actions
   let actions = [];
 
@@ -564,7 +567,6 @@ make_timeline = function (fields) {
     legend: { "orientation": "h", y: 0, font: { size: 18 } },
     font: { size: 14 }
   };
-
 
   var config = { responsive: true, displayModeBar: false };
 
