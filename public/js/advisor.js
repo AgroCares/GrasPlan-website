@@ -106,6 +106,7 @@ make_timeline = function (fields) {
   var color_pesticide = "rgb(255, 204, 0)";
   var color_invisible = "rgba(0,0,0,0)";
   var color_nature = "rgb(85, 205, 255)";
+  var color_renewal = "#034d02";
   var color_background = "#efebe9";
 
   // define zone list
@@ -178,6 +179,14 @@ make_timeline = function (fields) {
       name: 'Beheermaatregel',
       showlegend: true
     },
+    {
+      x: ["2020-01-10", "2020-01-10"],
+      perceel: 0,
+      line: { "color": color_renewal, "width": 20 },
+      mode: 'lines',
+      name: 'Graslandvernieuwing',
+      showlegend: true
+    },
     { // overwrite colors with blank :D 
       x: ["2020-01-10", "2020-01-10"],
       perceel: 0,
@@ -226,10 +235,14 @@ make_timeline = function (fields) {
           if (item.gra_count == null) {
             item.gra_count = "Onbekend";
           }
+          let x1 = formatDate(item.gra_end_date, 0)
+          if (item.gra_end_date == item.gra_start_date) {
+            x1 = formatDate(item.gra_end_date, 1);
+          }
           actions.push({
             // actie: 'weiden',
             x0: formatDate(item.gra_start_date, 0),
-            x1: formatDate(item.gra_end_date, 0),
+            x1: x1,
             y0: zone_list.findIndex(x => x.id == zone.zon_id) - 0.4,
             y1: zone_list.findIndex(x => x.id == zone.zon_id) + 0.4,
             line: { width: 0 },

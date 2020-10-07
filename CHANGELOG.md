@@ -1,5 +1,10 @@
 # Changelog GrasPlan-website
 
+## Versie 1.4.1 2020-10-07
+### Fixed
+* Adviseurs kunnen nu kalenders zien die graslandvernieuwing bevatten
+* Adviseurs zien nu een groene streep op de kalender als weiden 1 dag duurt
+
 ## Versie 1.4.0 2020-05-04
 ### Changed
 * Bij de kalender worden de zones nu alfabetisch gesorteerd
