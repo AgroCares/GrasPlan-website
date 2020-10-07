@@ -106,6 +106,7 @@ make_timeline = function (fields) {
   var color_pesticide = "rgb(255, 204, 0)";
   var color_invisible = "rgba(0,0,0,0)";
   var color_nature = "rgb(85, 205, 255)";
+  var color_renewal = "#034d02";
   var color_background = "#efebe9";
 
   // define zone list
@@ -176,6 +177,14 @@ make_timeline = function (fields) {
       line: { "color": color_nature, "width": 20 },
       mode: 'lines',
       name: 'Beheermaatregel',
+      showlegend: true
+    },
+    {
+      x: ["2020-01-10", "2020-01-10"],
+      perceel: 0,
+      line: { "color": color_renewal, "width": 20 },
+      mode: 'lines',
+      name: 'Graslandvernieuwing',
       showlegend: true
     },
     { // overwrite colors with blank :D 
