@@ -97,8 +97,8 @@ router.post('/api_logout', function (req, res) {
     const session = req.signedCookies.gras_session;
 
     axios({
-        method: 'post',
-        url: base_url + 'user/logout?session_id='+session,
+        method: 'delete',
+        url: base_url + 'user/' + session,
         headers: {Authorization: 'Bearer ' + process.env.API_KEY}
     }).then(response => {
         console.log('logout succesvol');   
