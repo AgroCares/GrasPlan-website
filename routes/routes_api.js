@@ -114,13 +114,16 @@ router.post('/api_logout', function (req, res) {
 
 // #FARM 
 // FARM - GET Farm details
-router.get('/api_farm_sel', function (req, res) {
+router.post('/api_farm_sel', function (req, res) {
+    const farm_id = req.body.farm_id;
     const session = req.signedCookies.gras_session;
 
     axios({
         method: 'get',
-        url: base_url + 'farm/select?session_id='+session,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm/' + farm_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY}
     }).then(response => {   
         res.send({ success: true, message: 'GET Farm details succesvol', data: response.data});
     }).catch(err => {
@@ -133,11 +136,22 @@ router.get('/api_farm_sel', function (req, res) {
 router.put('/api_farm_update', function (req, res) {
     const session = req.signedCookies.gras_session;
     const farm_name = req.body.farm_name;
+    const farm_id = req.body.farm_id;
+    const farm_organic = req.body_farm_organic;
+    const farm_sector = req.body.farm_sector;
 
     axios({
         method: 'put',
-        url: base_url + 'farm/update?session_id='+session+'&farm_name='+farm_name,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm/' + farm_id,
+        params: {
+            farm_name: farm_name,
+            farm_organic: farm_organic,
+            farm_sector: farm_sector
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({success: true, message: 'Update farm details succesvol'});
     }).catch(err => {
@@ -148,13 +162,23 @@ router.put('/api_farm_update', function (req, res) {
 
 // FARM - ADD a farm
 router.post('/api_farm_add', function (req, res) {
-    let farm_name = req.body.farm_name;
+    const farm_name = req.body.farm_name;
     const session = req.signedCookies.gras_session;
+    const farm_organic = req.body_farm_organic;
+    const farm_sector = req.body.farm_sector;
 
     axios({
         method: 'post',
-        url: base_url + 'farm/add?session_id='+session+'&frm_name='+ farm_name + '&farm_organic=false',
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm',
+        params: {
+            farm_name: farm_name,
+            farm_organic: farm_organic,
+            farm_sector: farm_sector
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'Add farm succesvol'});
     }).catch(err => {
@@ -169,8 +193,11 @@ router.get('/api_farm_list', function (req, res) {
 
     axios({
         method: 'get',
-        url: base_url + 'farm/list?session_id='+session,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm',
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'farm list ingeladen', data: response.data });
     }).catch(err => {
@@ -180,31 +207,34 @@ router.get('/api_farm_list', function (req, res) {
 });
 
 // FARM - switch from farm
-router.put('/api_farm_switch', function (req, res) {
-    const frm_id = req.body.frm_id;
-    const session = req.signedCookies.gras_session;
+// router.put('/api_farm_switch', function (req, res) {
+//     const frm_id = req.body.frm_id;
+//     const session = req.signedCookies.gras_session;
 
-    axios({
-        method: 'put',
-        url: base_url + 'farm/switch?session_id='+session+'&frm_id='+frm_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
-    }).then(response => {   
-        res.send({ success: true, message: 'farm switch DB gelukt' });
-    }).catch(err => {
-        console.log('farm switch DB is helaas niet gelukt: '+ err);
-        res.send({ success: false});
-    });
-});
+//     axios({
+//         method: 'put',
+//         url: base_url + 'farm/switch?session_id='+session+'&frm_id='+frm_id,
+//         headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+//     }).then(response => {   
+//         res.send({ success: true, message: 'farm switch DB gelukt' });
+//     }).catch(err => {
+//         console.log('farm switch DB is helaas niet gelukt: '+ err);
+//         res.send({ success: false});
+//     });
+// });
 
 // FARM - Delete farm
 router.post('/api_farm_del', function (req, res) {
-    let frm_id = req.body.frm_id;
+    const farm_id = req.body.frm_id;
     const session = req.signedCookies.gras_session;
 
     axios({
         method: 'delete',
-        url: base_url + 'farm/delete?session_id='+session + '&frm_id=' + frm_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm/' + farm_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'farm deleted' });
     }).catch(err => {
