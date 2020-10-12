@@ -25,9 +25,13 @@ router.post('/api_login', function (req, res) {
     const password = req.body.password;
 
     axios({
-        method: 'post',
-        url: base_url + 'user/login?email='+email+'&password='+password,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        method: 'get',
+        url: base_url + 'user',
+        headers: {
+            Email: email,
+            Password: password,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         console.log('inlog succesvol');  
         res.cookie('gras_session', response.data.data.session_id, cookie_config); 
@@ -44,19 +48,33 @@ router.post('/api_register', async function (req, res) {
     const email = req.body.email;
     const password = req.body.password;
     const farm_name = req.body.farm_name;
+    const farm_organic = req.body.farm_organic;
+    const farm_sector = req.body.farm_sector;
     let success = false;
 
     const registration = await axios({
         method: 'post',
-        url: base_url + 'user/register?email='+ email + '&password='+password,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'user',
+        headers: {
+            Email: email,
+            Password: password,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     });
 
     if (registration.data.status == 200) {
         const farm = await axios({
             method: 'post',
-            url: base_url + 'farm/add?session_id='+ registration.data.data.session_id + '&frm_name=' + farm_name,
-            headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+            url: base_url + 'farm',
+            params: {
+                farm_name: farm_name,
+                farm_organic: farm_organic,
+                farm_sector: farm_sector
+            },
+            headers: {
+                Session: registration.data.data.session_id,
+                Authorization: 'Bearer ' + process.env.API_KEY
+            }
         });
         if (farm.data.status == 200) {
             success = true;
