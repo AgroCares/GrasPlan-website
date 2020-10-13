@@ -546,15 +546,18 @@ router.post('/api_fertilising_add', function (req, res) {
     let prd_id = req.body.prd_id;
     let amount = req.body.amount;
 
-    amount_url = "";
-    if (amount != "") {
-        amount_url = '&fer_amount='+ amount;
-    }
-   
     axios({
         method: 'post',
-        url: base_url + 'fertilization/add?session_id=' + session + '&fer_date='+ date + '&zon_id=' + zone_id + '&fertilizer_id=' + prd_id + amount_url,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'zone/' + zone_id + ' /fertilization',
+        params: {
+            fertilizer_id: prd_id,
+            fertilization_date: date,
+            fertilization_amount: amount
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'Add fertilizer event succesvol', data: response.data});
     }).catch(err => {
@@ -569,12 +572,15 @@ router.post('/api_fertilising_add', function (req, res) {
 // FERTILISATION - Delete a fertilisation
 router.post('/api_fertilising_delete', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const event = req.body.eventId;
+    const fertilization_id = req.body.eventId;
 
     axios({
         method: 'delete',
-        url: base_url + 'fertilization/delete?session_id='+session+'&fer_id='+event,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + '/fertilization' + fertilization_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'mowing deleting succesful' });
     }).catch(err => {
