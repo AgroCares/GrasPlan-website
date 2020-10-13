@@ -595,13 +595,19 @@ router.post('/api_fertilising_delete', function (req, res) {
 // BESPUITING - Add a fertilisation
 router.post('/api_pesticidation_add', function (req, res) {
     const session = req.signedCookies.gras_session;
-    let zone_id = req.body.zone_id;
-    let date = req.body.date;
+    const zone_id = req.body.zone_id;
+    const date = req.body.date;
  
     axios({
         method: 'post',
         url: base_url + 'pesticidation/add?session_id=' + session + '&pesticidation_date='+ date + '&zone_id=' + zone_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        params: {
+            pesticidation_date: date
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'Add pesticidation event succesvol', data: response.data});
     }).catch(err => {
@@ -614,12 +620,15 @@ router.post('/api_pesticidation_add', function (req, res) {
 // BESPUITING - Delete a BESPUITING
 router.post('/api_pesticidation_delete', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const event = req.body.eventId;
+    const pesticidation_id = req.body.eventId;
 
     axios({
         method: 'delete',
-        url: base_url + 'pesticidation/delete?session_id='+session+'&pesticidation_id='+event,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'pesticidation/' + pesticidation_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'pesticidation deleting succesful' });
     }).catch(err => {
@@ -631,12 +640,15 @@ router.post('/api_pesticidation_delete', function (req, res) {
 // Beheersmaatregel- Delete a Beheersmaatregel
 router.post('/api_nature_measure_delete', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const event = req.body.eventId;
+    const nature_management_id = req.body.eventId;
 
     axios({
         method: 'delete',
-        url: base_url + 'nature_management/delete?session_id='+session+'&nature_management_id='+event,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'nature_management/' + nature_management_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'nature management deleting succesful' });
     }).catch(err => {
@@ -648,12 +660,15 @@ router.post('/api_nature_measure_delete', function (req, res) {
 // Graslandvernieuwing- Delete a Graslandvernieuwing
 router.post('/api_grassland_renewal_delete', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const event = req.body.eventId;
+    const grassland_renewal_id = req.body.eventId;
 
     axios({
         method: 'delete',
-        url: base_url + 'grassland_renewal/delete?session_id='+session+'&renewal_id='+event,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'grassland_renewal/' + grassland_renewal_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'nature management deleting succesful' });
     }).catch(err => {
