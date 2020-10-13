@@ -728,14 +728,17 @@ router.get('/api_spatial_fields', function (req, res) {
 
 });
 
-// Get farm parcels from a certain extent
+// Get list of advisors
 router.get('/api_advisors_lookup', function (req, res) {
     const session = req.signedCookies.gras_session;
 
     axios({
         method: 'get',
-        url: base_url + '/advisor/list?session_id=' + session,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'advisors',
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -749,12 +752,16 @@ router.get('/api_advisors_lookup', function (req, res) {
 // Allow advisor access to farm
 router.post('/api_advisor_allow', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const params = req.body;
+    const farm_id = req.body.farm_id;
+    const advisor_id = req.body.advisor_id;
 
     axios({
         method: 'post',
-        url: base_url + '/advisor/allow?session_id=' + session + '&advisor_id=' + params.advisor_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm/' + farm_id + '/advisor/' + advisor_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -768,12 +775,16 @@ router.post('/api_advisor_allow', function (req, res) {
 // Disallow advisor access to farm
 router.post('/api_advisor_disallow', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const params = req.body;
+    const farm_id = req.body.farm_id;
+    const advisor_id = req.body.advisor_id;
 
     axios({
-        method: 'put',
-        url: base_url + '/advisor/disallow?session_id=' + session + '&advisor_id=' + params.advisor_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        method: 'delete',
+        url: base_url + 'farm/' + farm_id + '/advisor/' + advisor_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -786,10 +797,14 @@ router.post('/api_advisor_disallow', function (req, res) {
 
 router.get('/api_advisor_select', function (req, res) {
     const session = req.signedCookies.gras_session;
+
     axios({
         method: 'get',
-        url: base_url + '/advisor/select?session_id=' + session,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'advisor',
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -799,18 +814,22 @@ router.get('/api_advisor_select', function (req, res) {
     });
 });
 
+// Show farm to advisor
 router.post('/api_advisor_farm', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const params = req.body;
+    const farm_id = req.body.farm_id;
 
     axios({
         method: 'get',
-        url: base_url + '/advisor/farm?session_id=' + session +'&farm_id='+ params.farm_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm/' + farm_id + '/advisor/',
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        //console.log(err);
+        console.log(err);
         console.log('Error bij advisor select ophalen van NMI-DB '+ err);
         res.send({ success: false });
     });
