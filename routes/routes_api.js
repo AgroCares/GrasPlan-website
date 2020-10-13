@@ -837,12 +837,17 @@ router.post('/api_advisor_farm', function (req, res) {
 });
 
 router.post('/api_fertilizers_lookup', function (req, res) {
-    const params = req.body;
+    const fertilizer_type = req.body.fertilizer_type;
 
     axios({
         method: 'get',
-        url: base_url + '/lookup/fertilizers?fertilizer_type=' + params.fertilizer_type,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'fertilizers',
+        params: {
+            fertilizer_type: fertilizer_type
+        },
+        headers: {
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -850,15 +855,16 @@ router.post('/api_fertilizers_lookup', function (req, res) {
         console.log('Error bij list fertilizers ophalen van NMI-DB '+ err);
         res.send({ success: false });
     });
-
 });
 
 router.get('/api_nature_lookup', function (req, res) {
 
     axios({
         method: 'get',
-        url: base_url + '/lookup/nature_measures',
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'nature_measures',
+        headers: {
+            Authorization: 'Bearer ' + process.env.API_KEY
+    }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -878,8 +884,15 @@ router.post('/api_nature_add', function (req, res) {
 
     axios({
         method: 'post',
-        url: base_url + '/nature_management/add?session_id='+ session +'&field_id='+field_id+'&nature_measure_date='+nature_measure_date+'&nature_measure_id='+nature_measure_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'field/' + field_id + '/nature_management',
+        params: {
+            nature_management_date: nature_measure_date,
+            nature_measure_id: nature_measure_id
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -897,8 +910,11 @@ router.post('/api_nature_delete', function (req, res) {
 
     axios({
         method: 'delete',
-        url: base_url + '/nature_management/delete?session_id='+ session +'&nature_management_id='+ nature_management_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + '/nature_management/' + nature_management_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send({ success: true, message: 'nature deleting succesful' });
     }).catch(err => {
@@ -916,8 +932,14 @@ router.post('/api_renewal_add', function (req, res) {
 
     axios({
         method: 'post',
-        url: base_url + '/grassland_renewal/add?session_id='+ session +'&field_id='+field_id+'&renewal_date='+renewal_date,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'field/' + field_id + '/grassland_renewal',
+        params: {
+            grassland_renewal_date: renewal_date
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -935,8 +957,11 @@ router.post('/api_grassland_renewal_delete', function (req, res) {
 
     axios({
         method: 'delete',
-        url: base_url + '/grassland_renewal/delete?session_id='+ session +'&renewal_id='+ renewal_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'grassland_renewal/' + renewal_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send({ success: true, message: 'nature deleting succesful' });
     }).catch(err => {
