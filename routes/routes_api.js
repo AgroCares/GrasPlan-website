@@ -680,14 +680,24 @@ router.post('/api_grassland_renewal_delete', function (req, res) {
 // #BRP  
 // Get brp parcels from a certain extent
 router.get('/api_brp', function (req, res) {
-
-    const params = req.query;
-    // mogelijk: parameter jaar: &
+    const xmax = req.body.xmax;
+    const ymax = req.body.ymax;
+    const xmin  = req.body.xmin;
+    const ymin = req.body.ymin;
 
     axios({
         method: 'get',
-        url: base_url +'/brp?xmin='+ params.xmin +'&ymin='+ params.ymin +'&xmax='+ params.xmax +'&ymax='+ params.ymax,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url +'spatial/fields',
+        params: {
+            xmax: xmax,
+            ymax: ymax,
+            xmin: xmin,
+            ymin: ymin
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
@@ -700,11 +710,15 @@ router.get('/api_brp', function (req, res) {
 // Get farm parcels from a certain extent
 router.get('/api_spatial_fields', function (req, res) {
     const session = req.signedCookies.gras_session;
+    const farm_id = req.body.farm_id;
 
     axios({
         method: 'get',
-        url: base_url + '/spatial/farm?session_id=' + session,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm/' + farm_id + '/spatial',
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
