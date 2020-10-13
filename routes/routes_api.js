@@ -443,23 +443,19 @@ router.post('/api_grazing_add', function (req, res) {
     const cattle_type = req.body.cattle_type;
     const cattle_count = req.body.cattle_count;
     
-    let date2_url = "";
-    if (date2 != "") {
-        date2_url = '&date_end_grazing='+ date2;
-    }
-    let type_url = "";
-    if (cattle_type != "") {
-        type_url = '&cattle_type='+ cattle_type;
-    }
-    let count_url = "";
-    if (cattle_count != "") {
-        count_url = '&cattle_count='+ cattle_count;
-    }
-
     axios({
         method: 'post',
-        url: base_url + 'grazing/add?session_id=' + session + '&zone_id=' + zone_id + '&date_start_grazing='+ date1 + date2_url + type_url + count_url,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'zone/'+ zone_id + '/grazing',
+        params: {
+            cattle_type: cattle_type,
+            cattle_count: cattle_count,
+            grazing_start_date: date1,
+            grazing_end_date: date2
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'Add grazing succesvol', data: response.data});
     }).catch(err => {
@@ -477,12 +473,15 @@ router.post('/api_grazing_add', function (req, res) {
 // GRAZING - Delete grazing
 router.post('/api_grazing_delete', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const event = req.body.eventId;
+    const grazing_id = req.body.eventId;
 
     axios({
         method: 'delete',
-        url: base_url + 'grazing/delete?session_id='+session+'&grazing_id='+event,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'grazing/' + grazing_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'grazing deleting succesful' });
     }).catch(err => {
