@@ -249,14 +249,27 @@ router.post('/api_farm_del', function (req, res) {
 // FIELD - Add a field
 router.post('/api_field_add', function (req, res) {
     const session = req.signedCookies.gras_session;
-    let field_id = req.body.ref_id;
-    let field_name = req.body.fld_name;
-    let zone_count = req.body.fld_zone_count;
+    const farm_id = req.body.frm_id;
+    const reference_id = req.body.ref_id;
+    const field_name = req.body.fld_name;
+    const zone_count = req.body.fld_zone_count;
+    const field_year = 2020;
+    const crop_code = 265;
 
     axios({
         method: 'post',
-        url: base_url + 'field/add?session_id=' + session + '&ref_id=' + field_id + '&year=2020&name='+ field_name+'&brp_gewascode=265&zone_count='+zone_count,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm/' + farm_id + '/field',
+        params: {
+            reference_id: reference_id,
+            field_name: field_name,
+            field_year: field_year,
+            crop_code: crop_code,
+            zone_count: zone_count
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'Add field succesvol', data: response.data});
     }).catch(err => {
@@ -265,15 +278,22 @@ router.post('/api_field_add', function (req, res) {
     });
 });
 
-// FIELD - Update a field
-router.get('/api_field_get', function (req, res) {
+// FIELD - update a field
+router.get('/api_field_update', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const field = req.body.field_id;
+    const field_id = req.body.field_id;
+    const field_name = req.body.field_name;
 
     axios({
-        method: 'get',
-        url: base_url + 'field/update?session_id='+session+'&fld_id='+field,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        method: 'put',
+        url: base_url + 'field/' + field_id,
+        params: {
+            field_name: field_name
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send(response.data);
         res.send({ success: true, message: 'Update field details succesvol' });
@@ -286,11 +306,15 @@ router.get('/api_field_get', function (req, res) {
 // FIELD - List all fields
 router.get('/api_field_list', function (req, res) {
     const session = req.signedCookies.gras_session;
+    const farm_id = req.body.farm_id;
 
     axios({
         method: 'get',
-        url: base_url + 'field/list?session_id='+session,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'farm/' + farm_id + '/field',
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'field details ingeladen', data: response.data});
     }).catch(err => {
@@ -302,12 +326,15 @@ router.get('/api_field_list', function (req, res) {
 // FIELD - Select a field
 router.post('/api_field_sel', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const field = req.body.fld_id;
+    const field_id = req.body.fld_id;
 
     axios({
         method: 'get',
-        url: base_url + 'field/select?session_id='+session+'&fld_id='+field,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'field/' + field_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send(response.data);
         res.send({ success: true, message: 'GET field details succesvol' });
@@ -321,12 +348,15 @@ router.post('/api_field_sel', function (req, res) {
 router.post('/api_field_del', function (req, res) {
 
     const session = req.signedCookies.gras_session;
-    const field = req.body.fld_id;
+    const field_id = req.body.fld_id;
 
     axios({
         method: 'delete',
-        url: base_url + 'field/delete?session_id='+session+'&fld_id='+field,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'field/' + field_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'field details ingeladen' });
     }).catch(err => {
