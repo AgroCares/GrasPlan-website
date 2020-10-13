@@ -374,8 +374,14 @@ router.post('/api_zone_add', function (req, res) {
 
     axios({
         method: 'post',
-        url: base_url + 'zone/add?session_id=' + session + '&fld_id='+ field_id +'&zon_name=' + zone_name ,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'field/' + field_id + '/zone',
+        params: {
+            zone_name: zone_name
+        },
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'Add zone succesvol!!!!!!!' });
     }).catch(err => {
@@ -391,8 +397,11 @@ router.post('/api_zone_list', function (req, res) {
 
     axios({
         method: 'get',
-        url: base_url + 'zone/list?session_id=' + session + '&fld_id='+ field_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'field/' + field_id + '/zone',
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'list zone succesvol', data: response.data});
     }).catch(err => {
@@ -405,12 +414,15 @@ router.post('/api_zone_list', function (req, res) {
 // ZONE - Select a zone
 router.post('/api_zone_sel', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const zon_id = req.body.zone_id;
+    const zone_id = req.body.zone_id;
 
     axios({
         method: 'get',
-        url: base_url + 'zone/select?session_id=' + session + '&zon_id='+ zon_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'zone/' + zone_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'select zone succesvol', data: response.data});
     }).catch(err => {
