@@ -494,13 +494,16 @@ router.post('/api_grazing_delete', function (req, res) {
 // MOWING - Add a mowing event
 router.post('/api_mowing_add', function (req, res) {
     const session = req.signedCookies.gras_session;
-    let zone_id = req.body.zon_id;
-    let date = req.body.date;
+    const zone_id = req.body.zon_id;
+    const date = req.body.date;
 
     axios({
         method: 'post',
-        url: base_url + 'mowing/add?session_id=' + session + '&mowing_date='+ date + '&zone_id=' + zone_id,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'zone/' + zone_id + '/mowing',
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'Add field succesvol', data: response.data});
     }).catch(err => {
@@ -516,12 +519,15 @@ router.post('/api_mowing_add', function (req, res) {
 // MOWING - Delete a mowing
 router.post('/api_mowing_delete', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const event = req.body.eventId;
+    const mowing_id = req.body.eventId;
 
     axios({
         method: 'delete',
-        url: base_url + 'mowing/delete?session_id='+session+'&mowing_id='+event,
-        headers: {Authorization: 'Bearer ' + process.env.API_KEY}
+        url: base_url + 'mowing/' + mowing_id,
+        headers: {
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
     }).then(response => {   
         res.send({ success: true, message: 'mowing deleting succesful' });
     }).catch(err => {
