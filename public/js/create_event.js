@@ -1,6 +1,8 @@
 $(document).ready(async function () {
   M.AutoInit();
 
+  setFarmId()
+
   // show correct form based on user choice
   $('#event_selected').on('change', function (e) {
     showFormEvent();
@@ -9,8 +11,11 @@ $(document).ready(async function () {
 
   // global objects fields and zones
   let farm_select = await axios({
-    method: 'get',
-    url: '/api_farm_sel'
+    method: 'post',
+    url: '/api_farm_sel',
+    data: {
+      farm_id: localStorage.farm_id
+    }
   });
   let farm = farm_select.data.data.data;
 
@@ -125,12 +130,12 @@ fillFieldSelect = function (farm) {
   farm.field.forEach(field => {
 
     if (field.zone.length == 1) {
-      var options = "<option value='" + field.zone[0].zon_id + "'>" + field.fld_name + "</option>";
+      var options = "<option value='" + field.zone[0].zone_id + "'>" + field.field_name + "</option>";
       $("#fields_selected").append(options);
     } else {
       field.zone.forEach(zone => {
-        if (zone.zon_name != null) {
-          var options = "<option value='" + zone.zon_id + "'>" + field.fld_name + " (" + zone.zon_name + ")" + "</option>";
+        if (zone.zone_name != null) {
+          var options = "<option value='" + zone.zone_id + "'>" + field.field_name + " (" + zone.zone_name + ")" + "</option>";
           $("#fields_selected").append(options);
         }
       });
@@ -143,7 +148,7 @@ fillFieldSelect = function (farm) {
 fillField2Select = function (farm) {
 
   farm.field.forEach(field => {
-    var options = "<option value='" + field.fld_id + "'>" + field.fld_name + "</option>";
+    var options = "<option value='" + field.field_id + "'>" + field.field_name + "</option>";
     $("#fields_selected_fieldsonly").append(options);
   });
   $("#fields_selected_fieldsonly").formSelect(); // reinitialize
@@ -151,7 +156,7 @@ fillField2Select = function (farm) {
 };
 fillNatureSelect = function (nature_list) {
   nature_list.forEach(item => {
-    var options = "<option value='" + item.lnm_id + "'>" + item.lnm_measure_nl + "</option>";
+    var options = "<option value='" + item.nature_measure_id + "'>" + item.nature_measure_name + "</option>";
     $("#natuurmaatregel_select").append(options);
   });
   $("#natuurmaatregel_select").formSelect(); // reinitialize
