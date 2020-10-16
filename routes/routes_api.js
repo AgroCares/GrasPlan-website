@@ -679,7 +679,7 @@ router.post('/api_grassland_renewal_delete', function (req, res) {
 
 // #BRP  
 // Get brp parcels from a certain extent
-router.get('/api_brp', function (req, res) {
+router.post('/api_brp', function (req, res) {
     const xmax = req.body.xmax;
     const ymax = req.body.ymax;
     const xmin  = req.body.xmin;
@@ -695,7 +695,6 @@ router.get('/api_brp', function (req, res) {
             ymin: ymin
         },
         headers: {
-            Session: session,
             Authorization: 'Bearer ' + process.env.API_KEY
         }
     }).then(response => {  
