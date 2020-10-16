@@ -708,7 +708,7 @@ router.get('/api_brp', function (req, res) {
 });
 
 // Get farm parcels from a certain extent
-router.get('/api_spatial_fields', function (req, res) {
+router.post('/api_spatial_fields', function (req, res) {
     const session = req.signedCookies.gras_session;
     const farm_id = req.body.farm_id;
 

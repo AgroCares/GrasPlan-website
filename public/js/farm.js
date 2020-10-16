@@ -2,20 +2,28 @@ $(document).ready(async function () {
   // Initialize Materialize CSS
   M.AutoInit();
 
+  setFarmId()
+
   // global objects fields and zones
   let farm_select = await axios({
-    method: "get",
-    url: "/api_farm_sel"
+    method: "post",
+    url: "/api_farm_sel",
+    data: {
+      farm_id: localStorage.farm_id
+    }
   });
   let farm = farm_select.data.data.data;
 
-  let farm_name = farm_select.data.data.data.frm_name;
+  let farm_name = farm_select.data.data.data.farm_name;
   $("#bedrijfsnaam").append("<h4>Bedrijfsoverzicht " + farm_name + "</h4>");
 
   // global object geo fields
   let geo_fields = await axios({
-    method: "get",
-    url: "/api_spatial_fields"
+    method: "post",
+    url: "/api_spatial_fields",
+    data: {
+      farm_id: localStorage.farm_id
+    }
   });
   let field_polygones = geo_fields.data.data;
 
@@ -52,11 +60,11 @@ async function make_fieldTable(farm) {
 
   farm.field.forEach(fld => {
     data.push([
-      fld.fld_name,
-      round(fld.fld_area / 10000, 2),
+      fld.field_name,
+      round(fld.field_area / 10000, 2),
       fld.zone.length,
       "<button> Verwijderen</button>",
-      fld.fld_id
+      fld.field_id
     ]);
   });
 
@@ -97,7 +105,7 @@ function setupMap() {
   }).setView([51.976, 5.611], 13);
   L.tileLayer("https://b.tile.openstreetmap.de/{z}/{x}/{y}.png", {
     attribution:
-      'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     maxZoom: 18,
     id: "basemap"
   }).addTo(map);
@@ -116,7 +124,10 @@ deleteField = function (field) {
   axios({
     method: "post",
     url: "/api_field_del",
-    data: { fld_id: field }
+    data: { 
+      fld_id: field,
+      farm_id: localStorage.farm_id
+    }
   })
     .then(function (res) {
 
