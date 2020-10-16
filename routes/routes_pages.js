@@ -17,7 +17,6 @@ renderOrRedirect = async function (req, res, page, public, advisor = false) {
             res.clearCookie('gras_session');
             res.redirect('login');
         }
-
     } else {
 
         const check = await axios({
@@ -41,11 +40,8 @@ renderOrRedirect = async function (req, res, page, public, advisor = false) {
                 res.clearCookie('gras_session');
                 res.redirect('login');
             }
-
         }
-
     }
-
 };
 
 // Render the homepage
@@ -109,7 +105,6 @@ router.get('/register', async function (req, res) {
             res.render('pages/register', { logged_in: false, page: 'register' });
         }
     }
-
 });
 
 // Render farm details page

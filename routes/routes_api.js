@@ -971,6 +971,24 @@ router.post('/api_grassland_renewal_delete', function (req, res) {
     });
 });
 
+router.post('/api_session_farm', function (req, res) {
+    const session = req.signedCookies.gras_session;
+
+    axios({
+        method: 'get',
+        url: base_url + 'user/' + session + '/farm',
+        headers: {
+            Authorization: 'Bearer ' + process.env.API_KEY
+        }
+    }).then(response => {  
+        console.log(response)
+        res.send({ success: true, message: 'farm_id request successfull', data: {farm_id: response.data.data.farm_id}});
+    }).catch(err => {
+        console.log(err);
+        res.send({ success: false });
+    });
+});
+
 
 // Export the routing
 module.exports = router;

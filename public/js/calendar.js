@@ -1,9 +1,11 @@
 $(document).ready(async function () {
   M.AutoInit();
 
+  setFarmId()
+
   //  Define farm in global env
   let farm_select = await axios({
-    method: 'get',
+    method: 'post',
     url: '/api_farm_sel'
   });
   let fields = farm_select.data.data.data.field;
