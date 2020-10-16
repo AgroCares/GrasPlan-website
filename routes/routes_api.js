@@ -249,12 +249,16 @@ router.post('/api_farm_del', function (req, res) {
 // FIELD - Add a field
 router.post('/api_field_add', function (req, res) {
     const session = req.signedCookies.gras_session;
-    const farm_id = req.body.frm_id;
+    const farm_id = req.body.farm_id;
     const reference_id = req.body.ref_id;
     const field_name = req.body.fld_name;
-    const zone_count = req.body.fld_zone_count;
+    let zone_count = req.body.zone_count;
     const field_year = 2020;
     const crop_code = 265;
+
+    if (zone_count == '') {
+        zone_count = 1;
+    }
 
     axios({
         method: 'post',
