@@ -1,6 +1,8 @@
 $(document).ready(async function () {
   M.AutoInit();
 
+  setFarmId()
+
   await fillFarmTable();
 
 });
@@ -24,15 +26,15 @@ fillFarmTable = async function () {
     let badge = "";
     let btn_select = "";
 
-    btn_select = '<a id="sel_' + bedrijf.frm_id + '" name="btn_switch_bedrijf" class="waves-effect waves-light btn-small"><i class="material-icons left">check_circle</i>Selecteer</a>';
+    btn_select = '<a id="sel_' + bedrijf.farm_id + '" name="btn_switch_bedrijf" class="waves-effect waves-light btn-small"><i class="material-icons left">check_circle</i>Selecteer</a>';
 
-    if (!bedrijf.frm_name) {
-      bedrijf.frm_name = 'Geen naam toegevoegd';
+    if (!bedrijf.farm_name) {
+      bedrijf.farm_name = 'Geen naam toegevoegd';
     }
 
     $('#tbl_bedrijf').append(
       '<tr>' +
-      '<td>' + bedrijf.frm_name + ' ' + badge + '</td>' +
+      '<td>' + bedrijf.farm_name + ' ' + badge + '</td>' +
       '<td>' + btn_select + '</td>' +
       '</tr>'
     );
@@ -95,6 +97,7 @@ showFarm = async function (farm_sel) {
 
 
 make_timeline = function (fields) {
+
   // Empty div
   $('#timeline_plotly').empty();
 
@@ -114,16 +117,16 @@ make_timeline = function (fields) {
   fields.forEach(field => {
     if (field.zone.length == 1) {
       let zone_info = {
-        name: field.fld_name,
-        id: field.zone[0].zon_id
+        name: field.field_name,
+        id: field.zone[0].zone_id
       };
       zone_list.push(zone_info);
     } else {
       field.zone.forEach(zone => {
-        if (zone.zon_name != null) {
+        if (zone.zone_name != null) {
           let zone_info = {
-            name: field.fld_name + " (" + zone.zon_name + ")",
-            id: zone.zon_id
+            name: field.field_name + " (" + zone.zone_name + ")",
+            id: zone.zone_id
           }
           zone_list.push(zone_info);
         }
@@ -203,22 +206,22 @@ make_timeline = function (fields) {
       if (zone.mowing.length > 0) {
         zone.mowing.forEach(item => {
           actions.push({
-            x0: formatDate(item.mow_date, 0),
-            x1: formatDate(item.mow_date, 1),
-            y0: zone_list.findIndex(x => x.id == zone.zon_id) - 0.4,
-            y1: zone_list.findIndex(x => x.id == zone.zon_id) + 0.4,
+            x0: formatDate(item.mowing_date, 0),
+            x1: formatDate(item.mowing_date, 1),
+            y0: zone_list.findIndex(x => x.id == zone.zone_id) - 0.4,
+            y1: zone_list.findIndex(x => x.id == zone.zone_id) + 0.4,
             line: { width: 0 },
             // type: "rect",
             fillcolor: color_maaien
           });
           data_plot.push({
             actie: 'Maaien',
-            id: item.mow_id,
-            x: [formatDate(item.mow_date, 0), formatDate(item.mow_date, 0)],
-            y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
-            perceel: zone_list.findIndex(x => x.id == zone.zon_id),
+            id: item.mowing_id,
+            x: [formatDate(item.mowing_date, 0), formatDate(item.mowing_date, 0)],
+            y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
+            perceel: zone_list.findIndex(x => x.id == zone.zone_id),
             marker: { "color": color_invisible },
-            name: '<b>Maaidatum:</b> ' + formatDate(item.mow_date, 0),
+            name: '<b>Maaidatum:</b> ' + formatDate(item.mowing_date, 0),
             text: 'Maaien',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -229,33 +232,33 @@ make_timeline = function (fields) {
       // events for grazing
       if (zone.grazing.length > 0) {
         zone.grazing.forEach(item => {
-          if (item.lca_name_nl == null) {
-            item.lca_name_nl = "Onbekend";
+          if (item.cattle_type == null) {
+            item.cattle_type = "Onbekend";
           }
-          if (item.gra_count == null) {
-            item.gra_count = "Onbekend";
+          if (item.cattle_type == null) {
+            item.cattle_type = "Onbekend";
           }
-          let x1 = formatDate(item.gra_end_date, 0)
-          if (item.gra_end_date == item.gra_start_date) {
-            x1 = formatDate(item.gra_end_date, 1);
+          let x1 = formatDate(item.grazing_end_date, 0)
+          if (item.grazing_end_date == item.grazing_start_date) {
+            x1 = formatDate(item.grazing_end_date, 1);
           }
           actions.push({
             // actie: 'weiden',
-            x0: formatDate(item.gra_start_date, 0),
+            x0: formatDate(item.grazing_start_date, 0),
             x1: x1,
-            y0: zone_list.findIndex(x => x.id == zone.zon_id) - 0.4,
-            y1: zone_list.findIndex(x => x.id == zone.zon_id) + 0.4,
+            y0: zone_list.findIndex(x => x.id == zone.zone_id) - 0.4,
+            y1: zone_list.findIndex(x => x.id == zone.zone_id) + 0.4,
             line: { width: 0 },
             fillcolor: color_weiden
           });
           data_plot.push({
             actie: 'Beweiden', // even voor de console
-            id: item.gra_id,
-            x: [formatDate(item.gra_start_date, 0), formatDate(item.gra_end_date, 0)],
-            y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
-            perceel: zone_list.findIndex(x => x.id == zone.zon_id),
+            id: item.grazing_id,
+            x: [formatDate(item.grazing_start_date, 0), formatDate(item.grazing_end_date, 0)],
+            y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
+            perceel: zone_list.findIndex(x => x.id == zone.zone_id),
             marker: { "color": color_invisible },
-            name: '<b>Begindatum beweiden:</b> ' + formatDate(item.gra_start_date, 0) + '<br><b>Einddatum beweiden:</b> ' + formatDate(item.gra_end_date, 0) + '<br><b>Diergroep:</b> ' + item.lca_name_nl + '<br><b>Aantal dieren:</b> ' + item.gra_count,
+            name: '<b>Begindatum beweiden:</b> ' + formatDate(item.grazing_start_date, 0) + '<br><b>Einddatum beweiden:</b> ' + formatDate(item.grazing_end_date, 0) + '<br><b>Diergroep:</b> ' + item.cattle_type + '<br><b>Aantal dieren:</b> ' + item.cattle_count,
             text: 'Beweiden',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -267,29 +270,29 @@ make_timeline = function (fields) {
       // events for fertilizing 
       if (zone.fertilization.length > 0) {
         zone.fertilization.forEach(item => {
-          if (item.prd_name == null) {
-            item.prd_name = "Onbekend";
+          if (item.fertilizer_name == null) {
+            item.fertilizer_name = "Onbekend";
           }
-          if (item.fer_amount == null) {
-            item.fer_amount = "Onbekend";
+          if (item.fertilization_amount == null) {
+            item.fertilization_amount = "Onbekend";
           }
           actions.push({
-            x0: formatDate(item.fer_date, 0),
-            x1: formatDate(item.fer_date, 1),
-            y0: zone_list.findIndex(x => x.id == zone.zon_id) - 0.4,
-            y1: zone_list.findIndex(x => x.id == zone.zon_id) + 0.4,
+            x0: formatDate(item.fertilization_date, 0),
+            x1: formatDate(item.fertilization_date, 1),
+            y0: zone_list.findIndex(x => x.id == zone.zone_id) - 0.4,
+            y1: zone_list.findIndex(x => x.id == zone.zone_id) + 0.4,
             line: { width: 0 },
             // type: "rect",
             fillcolor: color_bemesten
           });
           data_plot.push({
             actie: 'Bemesten',
-            id: item.fer_id,
-            x: [formatDate(item.fer_date, 0), formatDate(item.fer_date, 0)],
-            y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
-            perceel: zone_list.findIndex(x => x.id == zone.zon_id),
+            id: item.fertilization_id,
+            x: [formatDate(item.fertilization_date, 0), formatDate(item.fertilization_date, 0)],
+            y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
+            perceel: zone_list.findIndex(x => x.id == zone.zone_id),
             marker: { "color": color_invisible },
-            name: '<b>Bemestingsdatum:</b> ' + formatDate(item.fer_date, 0) + '<br><b>Bemestingsproduct:</b> ' + item.prd_name + '<br><b>Bemestingshoeveelheid:</b> ' + item.fer_amount + ' kg per hectare',
+            name: '<b>Bemestingsdatum:</b> ' + formatDate(item.fertilization_date, 0) + '<br><b>Bemestingsproduct:</b> ' + item.fertilizer_name + '<br><b>Bemestingshoeveelheid:</b> ' + item.fertilization_amount + ' kg per hectare',
             text: 'Bemesten',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -301,22 +304,22 @@ make_timeline = function (fields) {
       if (zone.pesticidation.length > 0) {
         zone.pesticidation.forEach(item => {
           actions.push({
-            x0: formatDate(item.pes_date, 0),
-            x1: formatDate(item.pes_date, 1),
-            y0: zone_list.findIndex(x => x.id == zone.zon_id) - 0.4,
-            y1: zone_list.findIndex(x => x.id == zone.zon_id) + 0.4,
+            x0: formatDate(item.pesticidation_date, 0),
+            x1: formatDate(item.pesticidation_date, 1),
+            y0: zone_list.findIndex(x => x.id == zone.zone_id) - 0.4,
+            y1: zone_list.findIndex(x => x.id == zone.zone_id) + 0.4,
             line: { width: 0 },
             // type: "rect",
             fillcolor: color_pesticide
           });
           data_plot.push({
             actie: 'Pesticidegebruik',
-            id: item.pes_id,
-            x: [formatDate(item.pes_date, 0), formatDate(item.pes_date, 0)],
-            y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
-            perceel: zone_list.findIndex(x => x.id == zone.zon_id),
+            id: item.pesticidation_id,
+            x: [formatDate(item.pesticidation_date, 0), formatDate(item.pesticidation_date, 0)],
+            y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
+            perceel: zone_list.findIndex(x => x.id == zone.zone_id),
             marker: { "color": color_invisible },
-            name: '<b>Datum van pesticidegebruik:</b> ' + formatDate(item.pes_date, 0),
+            name: '<b>Datum van pesticidegebruik:</b> ' + formatDate(item.pesticidation_date, 0),
             text: 'Pesticidegebruik',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -329,10 +332,10 @@ make_timeline = function (fields) {
         zone.nature_management = [];
         field.nature_management.forEach(item => {
           actions.push({
-            x0: formatDate(item.nma_date, 0),
-            x1: formatDate(item.nma_date, 1),
-            y0: zone_list.findIndex(x => x.id == zone.zon_id) - 0.4,
-            y1: zone_list.findIndex(x => x.id == zone.zon_id) + 0.4,
+            x0: formatDate(item.nature_management_date, 0),
+            x1: formatDate(item.nature_management_date, 1),
+            y0: zone_list.findIndex(x => x.id == zone.zone_id) - 0.4,
+            y1: zone_list.findIndex(x => x.id == zone.zone_id) + 0.4,
             line: { width: 0 },
             // type: "rect",
             fillcolor: color_nature
@@ -340,11 +343,11 @@ make_timeline = function (fields) {
           data_plot.push({
             actie: 'Beheermaatregelen',
             id: item.nma_id,
-            x: [formatDate(item.nma_date, 0), formatDate(item.nma_date, 0)],
-            y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
-            perceel: zone_list.findIndex(x => x.id == zone.zon_id),
+            x: [formatDate(item.nature_management_date, 0), formatDate(item.nature_management_date, 0)],
+            y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
+            perceel: zone_list.findIndex(x => x.id == zone.zone_id),
             marker: { "color": color_invisible },
-            name: '<b>Datum van beheermaatregel:</b> ' + formatDate(item.nma_date, 0) + '<br><b>Beheermaatregel:</b> ' + item.lnm_measure_nl,
+            name: '<b>Datum van beheermaatregel:</b> ' + formatDate(item.nature_management_date, 0) + '<br><b>Beheermaatregel:</b> ' + item.nature_measure_name,
             text: 'Beheermaatregelen',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -357,22 +360,22 @@ make_timeline = function (fields) {
         zone.grassland_renewal = [];
         field.grassland_renewal.forEach(item => {
           actions.push({
-            x0: formatDate(item.gre_date, 0),
-            x1: formatDate(item.gre_date, 1),
-            y0: zone_list.findIndex(x => x.id == zone.zon_id) - 0.4,
-            y1: zone_list.findIndex(x => x.id == zone.zon_id) + 0.4,
+            x0: formatDate(item.grassland_renewal_date, 0),
+            x1: formatDate(item.grassland_renewal_date, 1),
+            y0: zone_list.findIndex(x => x.id == zone.zone_id) - 0.4,
+            y1: zone_list.findIndex(x => x.id == zone.zone_id) + 0.4,
             line: { width: 0 },
             // type: "rect",
             fillcolor: color_renewal
           });
           data_plot.push({
             actie: 'Graslandvernieuwing',
-            id: item.nma_id,
-            x: [formatDate(item.gre_date, 0), formatDate(item.gre_date, 0)],
-            y: [zone_list.findIndex(x => x.id == zone.zon_id) - 0.4, zone_list.findIndex(x => x.id == zone.zon_id) + 0.4],
-            perceel: zone_list.findIndex(x => x.id == zone.zon_id),
+            id: item.gre_id,
+            x: [formatDate(item.grassland_renewal_date, 0), formatDate(item.grassland_renewal_date, 0)],
+            y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
+            perceel: zone_list.findIndex(x => x.id == zone.zone_id),
             marker: { "color": color_invisible },
-            name: '<b>Datum van graslandvernieuwing:</b> ' + formatDate(item.gre_date, 0),
+            name: '<b>Datum van graslandvernieuwing:</b> ' + formatDate(item.grassland_renewal_date, 0),
             text: 'Graslandvernieuwing',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -392,8 +395,8 @@ make_timeline = function (fields) {
       actions.push({
         x0: '20-03-01',
         x1: '20-03-01',
-        y0: zone_list.findIndex(x => x.id == zone.zon_id) + 1 - 0.4,
-        y1: zone_list.findIndex(x => x.id == zone.zon_id) + 1 + 0.4,
+        y0: zone_list.findIndex(x => x.id == zone.zone_id) + 1 - 0.4,
+        y1: zone_list.findIndex(x => x.id == zone.zone_id) + 1 + 0.4,
         line: { width: 0 },
         type: "rect",
         opacity: 1,
@@ -402,7 +405,7 @@ make_timeline = function (fields) {
       data_plot.push({
         actie: 'maaien',
         x: ['20-03-01', '20-03-01'],
-        perceel: zone_list.findIndex(x => x.id == zone.zon_id) + 1,
+        perceel: zone_list.findIndex(x => x.id == zone.zone_id) + 1,
         "marker": { "color": color_invisible },
         showlegend: false
       });
@@ -450,8 +453,6 @@ make_timeline = function (fields) {
 
 
   var config = { responsive: true, displayModeBar: false };
-
-
 
   Plotly.newPlot("timeline_plotly", data_plot, layout, config);
 };

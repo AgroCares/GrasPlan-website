@@ -4,7 +4,7 @@ $(document).ready(function () {
     M.AutoInit();
 
     $('#form_register').on('submit', function (e) {
-        console.log('we gaan registreren!!!')
+        //console.log('we gaan registreren!!!')
         e.preventDefault();
         $('#btn_submit').addClass("disabled");
         $('#icon-loading').removeClass('hide');
