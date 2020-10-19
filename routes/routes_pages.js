@@ -4,7 +4,6 @@ const router = express.Router();
 
 const base_url = process.env.API_URL;
 const maintenance = process.env.MAINTENANCE;
-console.log(maintenance);
 
 renderOrRedirect = async function (req, res, page, public, advisor = false) {
 
