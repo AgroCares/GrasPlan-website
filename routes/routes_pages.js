@@ -162,8 +162,10 @@ router.get('/overzicht', async function (req, res) {
     const session = req.signedCookies.gras_session;
     const check = await axios({
         method: 'get',
-        url: base_url + 'advisor/check?session_id=' + session,
-        headers: { Authorization: 'Bearer ' + process.env.API_KEY }
+        url: base_url + 'advisor/',
+        headers: { 
+            Session: session,
+            Authorization: 'Bearer ' + process.env.API_KEY }
     });
 
     if (check.data.data.advisor) {
