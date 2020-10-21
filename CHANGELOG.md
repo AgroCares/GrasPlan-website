@@ -1,5 +1,9 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.0 2020-10-21
+### Changed
+* De backend is nu bijgewerkt naar de laatste versie van de NMI API
+
 ## Versie 1.4.1 2020-10-07
 ### Fixed
 * Adviseurs kunnen nu kalenders zien die graslandvernieuwing bevatten

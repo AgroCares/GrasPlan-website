@@ -3,13 +3,18 @@ $(document).ready(async function () {
   // Initialize Materialize CSS
   M.AutoInit();
 
+  setFarmId()
+
   // map setup for fixed location and low zoom
   let map = setupMap();
 
   // get locations from fields for the farm
   let farm_fields = await axios({
-    method: "get",
-    url: "/api_spatial_fields"
+    method: "post",
+    url: "/api_spatial_fields",
+    data: {
+      farm_id: localStorage.farm_id
+    }
   });
   let farm_geo = farm_fields.data.data;
 
@@ -20,7 +25,7 @@ $(document).ready(async function () {
     farmLayer = new L.GeoJSON(farm_geo, {
       style: { fillColor: "#FF0000", fillOpacity: 0.8, weight: 0.5 },
       onEachFeature: function (feature, layer) {
-        layer.bindTooltip(feature.properties.fld_name, {
+        layer.bindTooltip(feature.properties.field_name, {
           permanent: false,
           direction: "center",
           className: "countryLabel"
@@ -44,12 +49,12 @@ $(document).ready(async function () {
 
   // if click on field => open modal om field toe te voegen
   brpLayer.on("click", function (e) {
-    let ref_id = e.sourceTarget.feature.properties.ref_id;
+    let ref_id = e.sourceTarget.feature.properties.reference_id;
     modalAdd(ref_id);
   });
   // if click on field => open modal om field toe te voegen
   farmLayer.on("click", function (e) {
-    let field_id = e.sourceTarget.feature.properties.fld_id;
+    let field_id = e.sourceTarget.feature.properties.field_id;
     modalDel(field_id);
   });
 
@@ -68,7 +73,7 @@ function setupMap() {
   }).setView([52.0907, 5.1214], 8);
   L.tileLayer("https://b.tile.openstreetmap.de/{z}/{x}/{y}.png", {
     attribution:
-      'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     maxZoom: 18,
     id: "basemap"
   }).addTo(map);
@@ -89,10 +94,15 @@ async function updateBRP(map, brpLayer, farmLayer, farm_geo) {
   const maxzoom = 12;
 
   if (zoom > maxzoom) {
-    let parameters = "?xmin=" + bbox._southWest.lng + "&ymin=" + bbox._southWest.lat + "&xmax=" + bbox._northEast.lng + "&ymax=" + bbox._northEast.lat;
     const geo_brp = await axios({
-      method: "get",
-      url: "/api_brp" + parameters
+      method: "post",
+      url: "/api_brp",
+      data: {
+        xmax: bbox._northEast.lng,
+        ymax: bbox._northEast.lat,
+        xmin: bbox._southWest.lng,
+        ymin: bbox._southWest.lat
+      }
     });
 
     if (geo_brp.data.status == 200) {
@@ -122,7 +132,7 @@ function modalAdd(ref_id) {
       $("#zones_check").removeClass("hide");
     } else {
       $("#zones_check").addClass("hide");
-      $("#field_zones").val("");
+      $("#field_zones").val('');
       M.updateTextFields();
     }
   });
@@ -136,9 +146,10 @@ function modalAdd(ref_id) {
     } else {
       let field = {
         fld_name: name,
-        fld_zone_count: zone_count,
-        ref_id: ref_id
-      };
+        zone_count: zone_count,
+        ref_id: ref_id,
+        farm_id: localStorage.farm_id
+      }
       // Add field with all zones to the database
       addField(field);
 
@@ -149,12 +160,11 @@ function modalAdd(ref_id) {
 
 // Add a field and zones to database
 addField = function (field) {
-  let data = field;
 
   axios({
     method: "post",
     url: "/api_field_add",
-    data: data
+    data: field
   }).then(function (res) {
     if (res.data.success) {
       console.log("veld toevoegen succes");
@@ -181,7 +191,10 @@ deleteField = function (field_id) {
   axios({
     method: "post",
     url: "/api_field_del",
-    data: { fld_id: field_id }
+    data: {
+      fld_id: field_id,
+      farm_id: localStorage.farm_id
+    }
   }).then(function (res) {
     console.log(res.data);
     if (res.data.success) {
