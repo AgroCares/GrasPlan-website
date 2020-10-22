@@ -4,6 +4,7 @@
 ### Fixed 
 * De functie `setFarmId` werd niet met await aangeroepen, terwijl dat wel nodig is
 * Fix om bemesting toe te voegen
+* Laat veldnaam zien bij percelen
 
 ## Versie 1.5.0 2020-10-21
 ### Changed
