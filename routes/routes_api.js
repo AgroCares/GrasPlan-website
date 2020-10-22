@@ -552,7 +552,7 @@ router.post('/api_fertilising_add', function (req, res) {
 
     axios({
         method: 'post',
-        url: base_url + 'zone/' + zone_id + ' /fertilization',
+        url: base_url + 'zone/' + zone_id + '/fertilization',
         params: {
             fertilizer_id: prd_id,
             fertilization_date: date,
