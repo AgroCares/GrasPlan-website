@@ -1,7 +1,7 @@
 $(document).ready(async function () {
   M.AutoInit();
 
-  setFarmId()
+  await setFarmId()
 
   await fillFarmTable();
 

@@ -1,7 +1,7 @@
 $(document).ready(async function () {
   M.AutoInit();
 
-  setFarmId()
+  await setFarmId()
 
   //  Define farm in global env
   let farm_select = await axios({

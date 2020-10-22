@@ -2,7 +2,7 @@ $(document).ready(async function () {
   // Initialize Materialize CSS
   M.AutoInit();
 
-  setFarmId()
+  await setFarmId()
 
   // global objects fields and zones
   let farm_select = await axios({

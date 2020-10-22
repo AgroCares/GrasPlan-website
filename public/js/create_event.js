@@ -1,7 +1,7 @@
 $(document).ready(async function () {
   M.AutoInit();
 
-  setFarmId()
+  await setFarmId()
 
   // show correct form based on user choice
   $('#event_selected').on('change', function (e) {
