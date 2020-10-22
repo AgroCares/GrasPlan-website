@@ -3,6 +3,7 @@
 ## Versie 1.5.1 2020-10-22
 ### Fixed 
 * De functie `setFarmId` werd niet met await aangeroepen, terwijl dat wel nodig is
+* Fix om bemesting toe te voegen
 
 ## Versie 1.5.0 2020-10-21
 ### Changed
