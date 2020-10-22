@@ -984,7 +984,7 @@ router.post('/api_session_farm', function (req, res) {
             Authorization: 'Bearer ' + process.env.API_KEY
         }
     }).then(response => {  
-        console.log(response)
+        console.log(response.data)
         res.send({ success: true, message: 'farm_id request successfull', data: {farm_id: response.data.data.farm_id}});
     }).catch(err => {
         console.log(err);
