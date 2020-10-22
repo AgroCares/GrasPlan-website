@@ -1,5 +1,9 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.1 2020-10-22
+### Fixed 
+* De functie `setFarmId` werd niet met await aangeroepen, terwijl dat wel nodig is
+
 ## Versie 1.5.0 2020-10-21
 ### Changed
 * De backend is nu bijgewerkt naar de laatste versie van de NMI API
