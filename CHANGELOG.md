@@ -1,6 +1,9 @@
 # Changelog GrasPlan-website
 
 ## Versie 1.5.2 2020-10-23
+### Added
+* Laat bij adviseurs de naam van het bedrijf zien boven de kalender
+
 ### Fixed
 * Fix om `farm_id` weg te halen uit localStorage bij login, anders problemen met meerdere accounts
 * Fix wanneer cattle count niet bekend is

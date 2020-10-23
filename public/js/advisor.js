@@ -83,6 +83,7 @@ showFarm = async function (farm_sel) {
     data: { farm_id: farm_sel }
   });
   let fields = farm.data.data.field;
+  $('#name_sel_farm').text(farm.data.data.farm_name)
   make_timeline(fields);
 
   timeline_plotly.on('plotly_click', function (e) {
