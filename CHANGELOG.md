@@ -1,5 +1,10 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.2 2020-10-23
+### Fixed
+* Fix om `farm_id` weg te halen uit localStorage bij login, anders problemen met meerdere accounts
+* Fix wanneer cattle count niet bekend is
+
 ## Versie 1.5.1 2020-10-22
 ### Fixed 
 * De functie `setFarmId` werd niet met await aangeroepen, terwijl dat wel nodig is
