@@ -356,14 +356,14 @@ make_timeline = function (fields) {
       // events for grazing
       if (zone.grazing.length > 0) {
         zone.grazing.forEach(item => {
-          if (item.lca_name_nl == null) {
-            item.lca_name_nl = "Onbekend";
+          if (item.cattle_type == null) {
+            item.cattle_type = "Onbekend";
           }
-          if (item.gra_count == null) {
-            item.gra_count = "Onbekend";
+          if (item.cattle_count == null) {
+            item.cattle_count = "Onbekend";
           }
           let x1 = formatDate(item.grazing_end_date, 0)
-          if (item.gra_end_date == item.grazing_start_date) {
+          if (item.grazing_end_date == item.grazing_start_date) {
             x1 = formatDate(item.grazing_end_date, 1);
           }
           actions.push({
@@ -382,7 +382,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zone_id),
             marker: { "color": color_invisible },
-            name: '<b>Begindatum beweiden:</b> ' + formatDate(item.grazing_start_date, 0) + '<br><b>Einddatum beweiden:</b> ' + formatDate(item.grazing_end_date, 0) + '<br><b>Diergroep:</b> ' + item.lca_name_nl + '<br><b>Aantal dieren:</b> ' + item.gra_count,
+            name: '<b>Begindatum beweiden:</b> ' + formatDate(item.grazing_start_date, 0) + '<br><b>Einddatum beweiden:</b> ' + formatDate(item.grazing_end_date, 0) + '<br><b>Diergroep:</b> ' + item.cattle_type + '<br><b>Aantal dieren:</b> ' + item.cattle_count,
             text: 'Beweiden',
             hoverinfo: "x+text",
             uid: "c2e171",
@@ -394,10 +394,10 @@ make_timeline = function (fields) {
       // events for fertilizing 
       if (zone.fertilization.length > 0) {
         zone.fertilization.forEach(item => {
-          if (item.prd_name == null) {
-            item.prd_name = "Onbekend";
+          if (item.fertilizer_name == null) {
+            item.fertilizer_name = "Onbekend";
           }
-          if (item.fer_amount == null) {
+          if (item.fertilization_amount == null) {
             item.fertilization_amount = "Onbekend";
           }
           actions.push({
@@ -416,7 +416,7 @@ make_timeline = function (fields) {
             y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
             perceel: zone_list.findIndex(x => x.id == zone.zone_id),
             marker: { "color": color_invisible },
-            name: '<b>Bemestingsdatum:</b> ' + formatDate(item.fertilization_date, 0) + '<br><b>Bemestingsproduct:</b> ' + item.prd_name + '<br><b>Bemestingshoeveelheid:</b> ' + item.fertilization_amount + ' kg per hectare',
+            name: '<b>Bemestingsdatum:</b> ' + formatDate(item.fertilization_date, 0) + '<br><b>Bemestingsproduct:</b> ' + item.fertilizer_name + '<br><b>Bemestingshoeveelheid:</b> ' + item.fertilization_amount + ' kg per hectare',
             text: 'Bemesten',
             hoverinfo: "x+text",
             uid: "c2e171",

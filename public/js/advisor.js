@@ -236,8 +236,8 @@ make_timeline = function (fields) {
           if (item.cattle_type == null) {
             item.cattle_type = "Onbekend";
           }
-          if (item.cattle_type == null) {
-            item.cattle_type = "Onbekend";
+          if (item.cattle_count == null) {
+            item.cattle_count = "Onbekend";
           }
           let x1 = formatDate(item.grazing_end_date, 0)
           if (item.grazing_end_date == item.grazing_start_date) {
