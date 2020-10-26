@@ -1,5 +1,12 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.3 2020-10-26
+### Changed
+* De kalendar loopt nu door tot 31 oktober ipv 10 oktober
+
+### Fixed
+* Kalender liet nu niet alle details zien bij beweiden
+
 ## Versie 1.5.2 2020-10-23
 ### Added
 * Laat bij adviseurs de naam van het bedrijf zien boven de kalender
