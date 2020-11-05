@@ -1,5 +1,9 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.4 2020-11-05
+### Fixed
+* Maaidatum werd niet opgeslagen
+
 ## Versie 1.5.3 2020-10-26
 ### Changed
 * De kalendar loopt nu door tot 31 oktober ipv 10 oktober

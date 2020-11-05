@@ -1,6 +1,6 @@
 {
   "name": "grasplan",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "The website of GrasPlan",
   "main": "server.js",
   "scripts": {
