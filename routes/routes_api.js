@@ -507,6 +507,9 @@ router.post('/api_mowing_add', function (req, res) {
     axios({
         method: 'post',
         url: base_url + 'zone/' + zone_id + '/mowing',
+        params: {
+            mowing_date: date
+        },
         headers: {
             Session: session,
             Authorization: 'Bearer ' + process.env.API_KEY
