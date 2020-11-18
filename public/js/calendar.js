@@ -291,7 +291,7 @@ make_timeline = function (fields) {
       showlegend: true
     },
     {
-      x: ["2020-01-10", "2020-01-10"],
+      x: ["2020-01-10", "2020-01-12"],
       perceel: 0,
       line: { "color": color_pesticide, "width": 20 },
       mode: 'lines',
@@ -550,7 +550,7 @@ make_timeline = function (fields) {
       // rangeselector: selectorOptions,
       // tickformatstops: ticks,
       // rangeslider: {range: ['2020-01-01', '2021-01-01']},
-      range: ['2020-02-20', '2020-10-31'],
+      range: ['2020-02-20', '2020-11-31'],
       fixedrange: true
     },
     yaxis: {

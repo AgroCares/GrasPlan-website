@@ -429,7 +429,7 @@ make_timeline = function (fields) {
       // rangeselector: selectorOptions,
       // tickformatstops: ticks,
       // rangeslider: {range: ['2020-01-01', '2021-01-01']},
-      range: ['2020-02-20', '2020-10-31'],
+      range: ['2020-02-20', '2020-11-31'],
       fixedrange: true
     },
     yaxis: {
