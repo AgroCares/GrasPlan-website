@@ -3,7 +3,7 @@ $(document).ready(async function () {
   // Initialize Materialize CSS
   M.AutoInit();
 
-  setFarmId()
+  await setFarmId()
 
   // map setup for fixed location and low zoom
   let map = setupMap();

@@ -1,5 +1,34 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.5 2020-11-18
+### Fixed
+* De kalender is verlengd tot 31 november
+
+## Versie 1.5.4 2020-11-05
+### Fixed
+* Maaidatum werd niet opgeslagen
+
+## Versie 1.5.3 2020-10-26
+### Changed
+* De kalendar loopt nu door tot 31 oktober ipv 10 oktober
+
+### Fixed
+* Kalender liet nu niet alle details zien bij beweiden
+
+## Versie 1.5.2 2020-10-23
+### Added
+* Laat bij adviseurs de naam van het bedrijf zien boven de kalender
+
+### Fixed
+* Fix om `farm_id` weg te halen uit localStorage bij login, anders problemen met meerdere accounts
+* Fix wanneer cattle count niet bekend is
+
+## Versie 1.5.1 2020-10-22
+### Fixed 
+* De functie `setFarmId` werd niet met await aangeroepen, terwijl dat wel nodig is
+* Fix om bemesting toe te voegen
+* Laat veldnaam zien bij percelen
+
 ## Versie 1.5.0 2020-10-21
 ### Changed
 * De backend is nu bijgewerkt naar de laatste versie van de NMI API

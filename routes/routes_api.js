@@ -445,7 +445,11 @@ router.post('/api_grazing_add', function (req, res) {
     const date1 = req.body.date1;
     const date2 = req.body.date2;
     const cattle_type = req.body.cattle_type;
-    const cattle_count = req.body.cattle_count;
+    let cattle_count = req.body.cattle_count;
+    
+    if (cattle_count == '') {
+        cattle_count = null;
+    }
     
     axios({
         method: 'post',
@@ -463,7 +467,6 @@ router.post('/api_grazing_add', function (req, res) {
     }).then(response => {   
         res.send({ success: true, message: 'Add grazing succesvol', data: response.data});
     }).catch(err => {
-        console.log(err);
         console.log('Fout bij toevoegen grazing: '+ err);
         res.send({ success: false });
     });
@@ -504,6 +507,9 @@ router.post('/api_mowing_add', function (req, res) {
     axios({
         method: 'post',
         url: base_url + 'zone/' + zone_id + '/mowing',
+        params: {
+            mowing_date: date
+        },
         headers: {
             Session: session,
             Authorization: 'Bearer ' + process.env.API_KEY
@@ -552,7 +558,7 @@ router.post('/api_fertilising_add', function (req, res) {
 
     axios({
         method: 'post',
-        url: base_url + 'zone/' + zone_id + ' /fertilization',
+        url: base_url + 'zone/' + zone_id + '/fertilization',
         params: {
             fertilizer_id: prd_id,
             fertilization_date: date,
@@ -745,7 +751,6 @@ router.get('/api_advisors_lookup', function (req, res) {
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        console.log(err);
         console.log('Error bij list advisors ophalen van NMI-DB '+ err);
         res.send({ success: false });
     });
@@ -768,7 +773,6 @@ router.post('/api_advisor_allow', function (req, res) {
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        console.log(err);
         console.log('Error bij allow advisor  '+ err);
         res.send({ success: false });
     });
@@ -791,7 +795,6 @@ router.post('/api_advisor_disallow', function (req, res) {
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        console.log(err);
         console.log('Error bij disallow advisor '+ err);
         res.send({ success: false });
     });
@@ -811,7 +814,6 @@ router.get('/api_advisor_select', function (req, res) {
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        console.log(err);
         console.log('Error bij advisor select ophalen van NMI-DB '+ err);
         res.send({ success: false });
     });
@@ -832,7 +834,6 @@ router.post('/api_advisor_farm', function (req, res) {
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        console.log(err);
         console.log('Error bij advisor select ophalen van NMI-DB '+ err);
         res.send({ success: false });
     });
@@ -871,7 +872,6 @@ router.get('/api_nature_lookup', function (req, res) {
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        console.log(err);
         console.log('Error bij list nature ophalen van NMI-DB '+ err);
         res.send({ success: false });
     });
@@ -899,7 +899,6 @@ router.post('/api_nature_add', function (req, res) {
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        console.log(err);
         console.log('Error bij add nature management van NMI-DB '+ err);
         res.send({ success: false });
     });
@@ -921,8 +920,7 @@ router.post('/api_nature_delete', function (req, res) {
     }).then(response => {  
         res.send({ success: true, message: 'nature deleting succesful' });
     }).catch(err => {
-        console.log(err);
-        // console.log('Error bij delete nature management van NMI-DB '+ err);
+        console.log('Error bij delete nature management van NMI-DB '+ err);
         res.send({ success: false });
     });
 });
@@ -946,7 +944,6 @@ router.post('/api_renewal_add', function (req, res) {
     }).then(response => {  
         res.send(response.data);
     }).catch(err => {
-        console.log(err);
         console.log('Error bij add grassland renewal van NMI-DB '+ err);
         res.send({ success: false });
     });
@@ -968,8 +965,7 @@ router.post('/api_grassland_renewal_delete', function (req, res) {
     }).then(response => {  
         res.send({ success: true, message: 'nature deleting succesful' });
     }).catch(err => {
-        console.log(err);
-        // console.log('Error bij delete nature management van NMI-DB '+ err);
+        console.log('Error bij delete nature management van NMI-DB '+ err);
         res.send({ success: false });
     });
 });
@@ -984,7 +980,7 @@ router.post('/api_session_farm', function (req, res) {
             Authorization: 'Bearer ' + process.env.API_KEY
         }
     }).then(response => {  
-        console.log(response)
+        //console.log(response.data)
         res.send({ success: true, message: 'farm_id request successfull', data: {farm_id: response.data.data.farm_id}});
     }).catch(err => {
         console.log(err);

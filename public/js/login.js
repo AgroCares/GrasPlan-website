@@ -43,6 +43,7 @@ sendLogin = function () {
         if (res.data.success) {
             // Successful response
             console.log('successfull login');
+            localStorage.removeItem('farm_id');
             window.location.href = "calendar";
         } else {
             // Unsuccessful response

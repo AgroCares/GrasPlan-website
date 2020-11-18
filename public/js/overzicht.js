@@ -1,7 +1,7 @@
 $(document).ready(async function () {
     M.AutoInit();
 
-    setFarmId()
+    await setFarmId()
 
     // Vul invoervelden bedrijf in met gekozen bedrijf
     const farm = await selectFarm();

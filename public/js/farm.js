@@ -2,7 +2,7 @@ $(document).ready(async function () {
   // Initialize Materialize CSS
   M.AutoInit();
 
-  setFarmId()
+  await setFarmId()
 
   // global objects fields and zones
   let farm_select = await axios({
@@ -32,7 +32,7 @@ $(document).ready(async function () {
   let geojsonLayer = new L.GeoJSON(field_polygones, {
     style: { fillColor: "#FF0000", fillOpacity: 0.8, weight: 0.5 },
     onEachFeature: function (feature, layer) {
-      layer.bindTooltip(feature.properties.fld_name, {
+      layer.bindTooltip(feature.properties.field_name, {
         permanent: false,
         direction: "center",
         className: "countryLabel"

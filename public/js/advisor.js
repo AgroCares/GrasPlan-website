@@ -1,7 +1,7 @@
 $(document).ready(async function () {
   M.AutoInit();
 
-  setFarmId()
+  await setFarmId()
 
   await fillFarmTable();
 
@@ -83,6 +83,7 @@ showFarm = async function (farm_sel) {
     data: { farm_id: farm_sel }
   });
   let fields = farm.data.data.field;
+  $('#name_sel_farm').text(farm.data.data.farm_name)
   make_timeline(fields);
 
   timeline_plotly.on('plotly_click', function (e) {
@@ -235,8 +236,8 @@ make_timeline = function (fields) {
           if (item.cattle_type == null) {
             item.cattle_type = "Onbekend";
           }
-          if (item.cattle_type == null) {
-            item.cattle_type = "Onbekend";
+          if (item.cattle_count == null) {
+            item.cattle_count = "Onbekend";
           }
           let x1 = formatDate(item.grazing_end_date, 0)
           if (item.grazing_end_date == item.grazing_start_date) {
@@ -428,7 +429,7 @@ make_timeline = function (fields) {
       // rangeselector: selectorOptions,
       // tickformatstops: ticks,
       // rangeslider: {range: ['2020-01-01', '2021-01-01']},
-      range: ['2020-02-20', '2020-10-10'],
+      range: ['2020-02-20', '2020-11-31'],
       fixedrange: true
     },
     yaxis: {
