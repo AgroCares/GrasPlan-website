@@ -1,5 +1,9 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.5 2020-11-18
+### Fixed
+* De kalender is verlengd tot 31 november
+
 ## Versie 1.5.4 2020-11-05
 ### Fixed
 * Maaidatum werd niet opgeslagen
