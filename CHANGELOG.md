@@ -1,5 +1,9 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.6 2020-11-23
+### Fixed
+* De kalender doet het weer voor gevallen waarbij een maaien een onbekende datum heeft
+
 ## Versie 1.5.5 2020-11-18
 ### Fixed
 * De kalender is verlengd tot 31 november
