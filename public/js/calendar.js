@@ -327,7 +327,7 @@ make_timeline = function (fields) {
   fields.forEach(field => {
     field.zone.forEach(zone => {
       // events for mowing
-      if (zone.mowing.length > 0) {
+      if (zone.mowing.length > 0 & zone.mowing.mowing_date != null) {
         zone.mowing.forEach(item => {
           actions.push({
             x0: formatDate(item.mowing_date, 0),
