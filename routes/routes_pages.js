@@ -93,7 +93,7 @@ router.get('/login', async function (req, res) {
             // check session
             const check = await axios({
                 method: 'get',
-                url: base_url + 'user/check_session?session_id=' + session,
+                url: base_url + 'user/' + session,
                 headers: { Authorization: 'Bearer ' + process.env.API_KEY }
             });
             if (check.status == 200) {
@@ -124,7 +124,7 @@ router.get('/register', async function (req, res) {
             // check session
             const check = await axios({
                 method: 'get',
-                url: base_url + 'user/check_session?session_id=' + session,
+                url: base_url + 'user/' + session,
                 headers: { Authorization: 'Bearer ' + process.env.API_KEY }
             });
             if (check.status == 200) {
