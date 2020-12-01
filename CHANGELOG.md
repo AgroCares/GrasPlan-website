@@ -1,5 +1,9 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.7 2020-12-01
+### Fixed
+* Lost een aantal situaties op waarbij de `session_id` niet goed herkend werd
+
 ## Versie 1.5.6 2020-11-23
 ### Fixed
 * De kalender doet het weer voor gevallen waarbij een maaien een onbekende datum heeft
