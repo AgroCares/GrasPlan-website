@@ -206,28 +206,30 @@ make_timeline = function (fields) {
       // events for mowing
       if (zone.mowing.length > 0) {
         zone.mowing.forEach(item => {
-          actions.push({
-            x0: formatDate(item.mowing_date, 0),
-            x1: formatDate(item.mowing_date, 1),
-            y0: zone_list.findIndex(x => x.id == zone.zone_id) - 0.4,
-            y1: zone_list.findIndex(x => x.id == zone.zone_id) + 0.4,
-            line: { width: 0 },
-            // type: "rect",
-            fillcolor: color_maaien
-          });
-          data_plot.push({
-            actie: 'Maaien',
-            id: item.mowing_id,
-            x: [formatDate(item.mowing_date, 0), formatDate(item.mowing_date, 0)],
-            y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
-            perceel: zone_list.findIndex(x => x.id == zone.zone_id),
-            marker: { "color": color_invisible },
-            name: '<b>Maaidatum:</b> ' + formatDate(item.mowing_date, 0),
-            text: 'Maaien',
-            hoverinfo: "x+text",
-            uid: "c2e171",
-            showlegend: false
-          });
+          if (item.mowing_date != null) {
+            actions.push({
+              x0: formatDate(item.mowing_date, 0),
+              x1: formatDate(item.mowing_date, 1),
+              y0: zone_list.findIndex(x => x.id == zone.zone_id) - 0.4,
+              y1: zone_list.findIndex(x => x.id == zone.zone_id) + 0.4,
+              line: { width: 0 },
+              // type: "rect",
+              fillcolor: color_maaien
+            });
+            data_plot.push({
+              actie: 'Maaien',
+              id: item.mowing_id,
+              x: [formatDate(item.mowing_date, 0), formatDate(item.mowing_date, 0)],
+              y: [zone_list.findIndex(x => x.id == zone.zone_id) - 0.4, zone_list.findIndex(x => x.id == zone.zone_id) + 0.4],
+              perceel: zone_list.findIndex(x => x.id == zone.zone_id),
+              marker: { "color": color_invisible },
+              name: '<b>Maaidatum:</b> ' + formatDate(item.mowing_date, 0),
+              text: 'Maaien',
+              hoverinfo: "x+text",
+              uid: "c2e171",
+              showlegend: false
+            });
+          }
         });
       }
       // events for grazing
