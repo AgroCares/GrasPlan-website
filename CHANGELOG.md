@@ -1,5 +1,9 @@
 # Changelog GrasPlan-website
 
+## Versie 1.5.8 2020-12-04
+### Fixed
+* De kalender laat nu weer maaien zien wanneer er meerdere maaien waren opgeslagen voor een zone
+
 ## Versie 1.5.7 2020-12-01
 ### Fixed
 * Lost een aantal situaties op waarbij de `session_id` niet goed herkend werd
