@@ -1,5 +1,7 @@
 # GrasPlan website
 
+NOTE: Development continued [here](https://github.com/AgroCares/GrasPlan-client). Please contact if you are interested.
+
 GrasPlan is een digitale graslandgebruikskalender. Met GrasPlan is het mogelijk om voor al je percelen het graslandmanagement bij te houdem. Je kunt hierin aangeven wanneer je gemaaid, beweid of bemest heeft. Daarna heb je direct met GrasPlan een eenvoudig van al percelen. GrasPlan ondersteunt ook rotatieweiden.
 
 GrasPlan wordt in 2020 ook ingezet binnen de GLB-pilot in Noord-Holland. GrasPlan is een eerste prototype. Heb je waardevolle feedback over de applicatie of wensen qua gebruikersvriendelijkheid en functionaliteit, laat het ons weten. Mail je reactie naar info@grasplan.nl of stuur een issue in op GitHub.
